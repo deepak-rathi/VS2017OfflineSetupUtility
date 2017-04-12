@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.Unity.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:Prism.Unity.Windows.PrismUnityApplication">
+            <summary>
+            Provides the base class for the Universal Windows Platform application object which
+            includes the automatic creation and wiring of the Unity container and 
+            the bootstrapping process for Prism services in the container.
+            </summary>
+        </member>
+        <member name="P:Prism.Unity.Windows.PrismUnityApplication.Current">
+            <summary>
+            Allow strongly typed access to the Application as a global
+            </summary>
+        </member>
+        <member name="P:Prism.Unity.Windows.PrismUnityApplication.Container">
+            <summary>
+            Get the IoC Unity Container 
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.Resolve(System.Type)">
+            <summary>
+            Implements the Resolves method to be handled by the Unity Container.
+            Use the container to resolve types (e.g. ViewModels and Flyouts)
+            so their dependencies get injected
+            </summary>
+            <param name="type">The type.</param>
+            <returns>A concrete instance of the specified type.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.CreateContainer">
+            <summary>
+            Creates the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> that will be used as the default container.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.ConfigureContainer">
+            <summary>
+            Creates and configures the container and service locator
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.ConfigureServiceLocator">
+            <summary>
+            Configures the LocatorProvider for the <see cref="T:Microsoft.Practices.ServiceLocation.ServiceLocator" />.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.CreateNavigationService(Prism.Windows.Navigation.IFrameFacade,Prism.Windows.AppModel.ISessionStateService)">
+            <summary>
+            Creates the nav service through the base class and registers it with the container
+            </summary>
+            <param name="rootFrame">The frame where nav happens</param>
+            <param name="sessionStateService">The session state service</param>
+            <returns>NavigationService</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.OnCreateSessionStateService">
+            <summary>
+            Creates the SessionStateService as a singleton through the container
+            </summary>
+            <returns>The SessionStateService</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.OnCreateDeviceGestureService">
+            <summary>
+            Creates the DeviceGestureService as a singleton through the container
+            </summary>
+            <returns>DeviceGestureService instance</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.OnCreateEventAggregator">
+            <summary>
+            Creates the IEventAggregator as a singleton through the container
+            </summary>
+            <returns>IEventAggregator instance</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.RegisterTypeIfMissing(System.Type,System.Type,System.Boolean)">
+            <summary>
+            Registers a type in the container only if that type was not already registered.
+            </summary>
+            <param name="fromType">The interface type to register.</param>
+            <param name="toType">The type implementing the interface.</param>
+            <param name="registerAsSingleton">Registers the type as a singleton.</param>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Prism.Unity.Windows.PrismUnityExtension">
+            <summary>
+            Implements a <see cref="T:Prism.Unity.Windows.PrismUnityExtension"/> that checks if a specific type was registered with the container.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityExtension.IsTypeRegistered(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Evaluates if a specified type was registered in the container.
+            </summary>
+            <param name="container">The container to check if the type was registered in.</param>
+            <param name="type">The type to check if it was registered.</param>
+            <returns><see langword="true" /> if the <paramref name="type"/> was registered with the container.</returns>
+            <remarks>
+            In order to use this extension, you must first call <see cref="M:Microsoft.Practices.Unity.UnityContainerExtensions.AddNewExtension``1(Microsoft.Practices.Unity.IUnityContainer)"/> 
+            and specify <see cref="T:Microsoft.Practices.Unity.UnityContainerExtension"/> as the extension type.
+            </remarks>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityExtension.Initialize">
+            <summary>
+            Initializes the container with this extension's functionality.
+            </summary>
+        </member>
+        <member name="T:Prism.Unity.Windows.UnityContainerHelper">
+            <summary>
+            Extensions methods to extend and facilitate the usage of <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.IsTypeRegistered(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Returns whether a specified type has a type mapping registered in the container.
+            </summary>
+            <param name="container">The <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> to check for the type mapping.</param>
+            <param name="type">The type to check if there is a type mapping for.</param>
+            <returns><see langword="true"/> if there is a type mapping registered for <paramref name="type"/>.</returns>
+            <remarks>In order to use this extension method, you first need to add the
+            <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> extension to the <see cref="T:Prism.Unity.Windows.PrismUnityExtension"/>.
+            </remarks>        
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.TryResolve``1(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Utility method to try to resolve a service from the container avoiding an exception if the container cannot build the type.
+            </summary>
+            <param name="container">The cointainer that will be used to resolve the type.</param>
+            <typeparam name="T">The type to resolve.</typeparam>
+            <returns>The instance of <typeparamref name="T"/> built up by the container.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.TryResolve(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Utility method to try to resolve a service from the container avoiding an exception if the container cannot build the type.
+            </summary>
+            <param name="container">The cointainer that will be used to resolve the type.</param>
+            <param name="typeToResolve">The type to resolve.</param>
+            <returns>The instance of <paramref name="typeToResolve"/> built up by the container.</returns>
+        </member>
+        <member name="T:Prism.Unity.Windows.UnityServiceLocatorAdapter">
+            <summary>
+            Defines a <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> adapter for the <see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/> interface to be used by the Prism Library.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityServiceLocatorAdapter.#ctor(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Initializes a new instance of <see cref="T:Prism.Unity.Windows.UnityServiceLocatorAdapter"/>.
+            </summary>
+            <param name="unityContainer">The <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> that will be used
+            by the <see cref="M:Prism.Unity.Windows.UnityServiceLocatorAdapter.DoGetInstance(System.Type,System.String)"/> and <see cref="M:Prism.Unity.Windows.UnityServiceLocatorAdapter.DoGetAllInstances(System.Type)"/> methods.</param>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityServiceLocatorAdapter.DoGetInstance(System.Type,System.String)">
+            <summary>
+            Resolves the instance of the requested service.
+            </summary>
+            <param name="serviceType">Type of instance requested.</param>
+            <param name="key">Name of registered service you want. May be null.</param>
+            <returns>The requested service instance.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityServiceLocatorAdapter.DoGetAllInstances(System.Type)">
+            <summary>
+            Resolves all the instances of the requested service.
+            </summary>
+            <param name="serviceType">Type of service requested.</param>
+            <returns>Sequence of service instance objects.</returns>
+        </member>
+    </members>
+</doc>
