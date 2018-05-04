@@ -1,3 +1,4 @@
 obj
 *.user
 /Setup/bin/Debug
+/Setup/bin/Release
