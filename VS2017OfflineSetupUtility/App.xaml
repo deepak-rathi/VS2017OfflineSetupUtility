@@ -2,6 +2,65 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
-         
+        <!--Black color-->
+        <SolidColorBrush x:Key="BlackSolidColorBrush" Color="#2c3e50" />
+        <!--Red color-->
+        <SolidColorBrush x:Key="RedSolidColorBrush" Color="#e74c3c" />
+
+        <!--App Header TextBlock-->
+        <Style x:Key="AppHeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Thin" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+
+        <!--Header TextBlock-->
+        <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+
+        <!--SubHeader TextBlock-->
+        <Style x:Key="SubHeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+
+        <!--Body TextBlock-->
+        <Style x:Key="BodyTextBlockStyle" TargetType="TextBlock" >
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+
+        <!--Left Content TextBlock-->
+        <Style x:Key="LeftContentTextBlockStyle" TargetType="TextBlock" >
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="17" />
+            <Setter Property="Foreground" Value="#2c3e50" />
+        </Style>
+
+        <!--Custom Seperator Style-->
+        <Style x:Key="HorizontalSeperatorStyle" TargetType="Rectangle" >
+            <Setter Property="Fill" Value="LightGray" />
+            <Setter Property="Height" Value="0.8" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+
+        <!--Custom Seperator Style-->
+        <Style x:Key="VerticalSeperatorStyle" TargetType="Rectangle" >
+            <Setter Property="Fill" Value="LightGray" />
+            <Setter Property="Width" Value="0.8" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+
+
     </Application.Resources>
 </Application>

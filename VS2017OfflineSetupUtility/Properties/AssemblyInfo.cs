@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VS2017OfflineSetupUtility")]
+[assembly: AssemblyTitle("VS2017 Offline Setup Utility")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VS2017OfflineSetupUtility")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("VS2017 Offline Setup Utility")]
+[assembly: AssemblyCopyright("Copyright ©  2017-2018 Deepak Rathi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

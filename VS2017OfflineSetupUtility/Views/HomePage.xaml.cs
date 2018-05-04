@@ -13,20 +13,18 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.Windows;
+using System.Windows.Controls;
 
 namespace VS2017OfflineSetupUtility.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomePage : Page
     {
-        public MainWindow()
+        public HomePage()
         {
             InitializeComponent();
-            App.CurrentFrame = _NavigationFrame;
-            _NavigationFrame.Navigate(new HomePage());
         }
     }
 }

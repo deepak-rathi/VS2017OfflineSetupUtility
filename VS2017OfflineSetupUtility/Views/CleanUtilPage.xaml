@@ -1,0 +1,130 @@
+﻿<!--
+    Copyright © 2017-2018 Deepak Rathi 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see<http://www.gnu.org/licenses/> .
+ -->
+<Page x:Class="VS2017OfflineSetupUtility.Views.CleanUtilPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Title="VS2017 Offline Clean Util">
+    <Page.Resources>
+        <DataTemplate x:Key="ModuleDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" Padding="5"/>
+                <TextBlock Text="{Binding Version}" Padding="5"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#region  Header-->
+        <TextBlock Grid.Row="0" Text="VS2017 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource HorizontalSeperatorStyle}"/>
+        <!--#endregion Header-->
+
+        <!--#region Footer-->
+        <Grid Grid.Row="2" Background="#e2e2e2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="(C) 2017-2018 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
+                       Padding="20" TextWrapping="Wrap" Foreground="Gray"
+                       Grid.Column="0"/>
+            <Button Content="Delete" Grid.Column="1" Width="80" Height="30" Background="{StaticResource RedSolidColorBrush}" Margin="10" Foreground="White"
+                    Command="{Binding DeleteOldVersionCommand}"/>
+            <Button Content="Cancel" Grid.Column="2" Width="80" Height="30" Background="White" Margin="10"
+                    Command="{Binding ExitCommand}"/>
+        </Grid>
+        <!--#endregion Footer-->
+
+        <!--#region Content-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Left Content-->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="1. Select Visual Studio 2017 Offline Setup Folder" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="2. Verify list of old folders with version number" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="3. Delete directories with old version from offline setup folder" Style="{StaticResource LeftContentTextBlockStyle}"/>
+            </StackPanel>
+            <!--#endregion Left Content-->
+
+            <Rectangle Grid.Column="1" Style="{StaticResource VerticalSeperatorStyle}"/>
+            <!--#region Center Content-->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="This utility allow deletion of old version Visual Studio 2017 Offline Setup files" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}" Padding="17"/>
+                <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBox Text="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="17,10" MinHeight="30" Width="450" FontSize="14"
+                                 Grid.Row="2" Grid.Column="0"
+                                 VerticalContentAlignment="Center"/>
+
+                        <Button Content="Select Folder*" Background="#1abc9c" Foreground="White" Margin="10" Padding="10" FontSize="14" MaxWidth="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
+                            Command="{Binding SelectFolderCommand}"/>
+                    </StackPanel>
+                    <Rectangle Grid.Row="1" Fill="LightGray" Height="0.8" />
+                    <TextBlock Grid.Row="2" Text="List of old folders with version number" FontSize="14" Padding="17,0" TextWrapping="Wrap" Foreground="{StaticResource BlackSolidColorBrush}"/>
+                    <ListView Grid.Row="3" ItemsSource="{Binding OldVersionModule}" ItemTemplate="{StaticResource ModuleDataTemplate}" BorderThickness="0" Margin="17,0"/>
+                </Grid>
+            </Grid>
+            <!--#endregion Center Content-->
+
+            <Rectangle Grid.Column="3" Width="0.8" VerticalAlignment="Stretch" Fill="LightGray"/>
+            <!--#region Right Content-->
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="Selected feature details" Padding="14" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock Text="Feature name" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,5"/>
+                <TextBlock Text="VS2017 Offline Clean Util" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
+                <TextBlock Text="Allow deletion of old version Visual Studio 2017 Offline Setup files and folder, which saves your hard disk space." Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
+                <TextBlock Text="1.0.0.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+            </StackPanel>
+            <!--#endregion Right Content-->
+        </Grid>
+        <!--#endregion Content-->
+    </Grid>
+</Page>

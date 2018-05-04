@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace VS2017OfflineSetupUtility
 {
@@ -14,5 +15,8 @@ namespace VS2017OfflineSetupUtility
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
         }
+
+        //TODO://Use Prism Naivgation. Due to lack of time I am using this variable, it will  be removed in future.
+        public static Frame CurrentFrame;
     }
 }
