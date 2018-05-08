@@ -102,7 +102,7 @@
                                  Grid.Row="2" Grid.Column="0"
                                  VerticalContentAlignment="Center"/>
 
-                        <Button Content="Select Folder*" Background="#1abc9c" Foreground="White" Margin="10" Padding="10" FontSize="14" MaxWidth="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
+                        <Button Content="Select Folder*" Background="{StaticResource GreenSolidColorBrush}" Foreground="White" Margin="10" Padding="10" FontSize="14" MaxWidth="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
                             Command="{Binding SelectFolderCommand}"/>
                     </StackPanel>
                     <Rectangle Grid.Row="1" Fill="LightGray" Height="0.8" />

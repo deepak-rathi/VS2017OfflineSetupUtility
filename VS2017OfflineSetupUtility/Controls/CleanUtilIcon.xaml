@@ -1,0 +1,32 @@
+﻿<!--
+    Copyright © 2017-2018 Deepak Rathi 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see<http://www.gnu.org/licenses/> .
+ -->
+<ContentControl x:Class="VS2017OfflineSetupUtility.Controls.CleanUtilIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+    <Viewbox Stretch="Uniform" Width="50" Height="50">
+        <Canvas Width="48" Height="48">
+            <Path x:Name="IconPath" Fill="#7f8c8d">
+                <Path.Data>
+                    <PathGeometry Figures="M28 10H8V8H28Zm4 2H8v2H32ZM26.227 34.813 21.414 30l4.813-4.813-1.414-1.414L18.586 30l6.227 6.227ZM42.414 30l-6.227-6.227-1.414 1.414L39.586 30l-4.812 4.813 1.414 1.414ZM48 16V44H13V32H4V4H40V16ZM13 30V16H38V6H6V30ZM46 18H15V42H46ZM29.351 38l4-16H31.29l-4 16Z" FillRule="NonZero"/>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+</ContentControl>

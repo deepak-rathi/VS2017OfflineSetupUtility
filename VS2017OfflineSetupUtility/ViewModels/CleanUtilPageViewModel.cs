@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using VS2017OfflineSetupUtility.Models;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
@@ -197,33 +198,4 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #endregion  Exit Command
     }
 
-    public class VSModule
-    {
-        #region Name
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        #endregion
-
-        #region Version
-        private string _version;
-
-        public string Version
-        {
-            get { return _version; }
-            set
-            {
-                _version = value;
-                VersionObject = new System.Version(value.Split('=')[1]);
-            }
-        }
-        #endregion
-
-        public string FullPath;
-        public System.Version VersionObject { get; private set; }
-    }
 }

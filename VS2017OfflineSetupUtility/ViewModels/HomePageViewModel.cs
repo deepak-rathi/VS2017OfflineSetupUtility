@@ -15,12 +15,53 @@
  */
 using Prism.Commands;
 using Prism.Mvvm;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using VS2017OfflineSetupUtility.Models;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
     class HomePageViewModel : BindableBase
     {
+        #region Selected Feature
+        private Feature _selectedFeature;
+
+        public Feature SelectedFeature
+        {
+            get { return _selectedFeature ?? (_selectedFeature = Features.FirstOrDefault()); }
+            set { SetProperty(ref _selectedFeature, value); }
+        }
+
+        #endregion Selected Feature
+
+        #region Features
+        private List<Feature> _features;
+
+        public List<Feature> Features
+        {
+            get { return _features ?? (_features = Utils.FeatureUtil.GetFeatures()); }
+            set { SetProperty(ref _features, value); }
+        }
+        #endregion
+
+        #region FeatureClickedCommand
+        private DelegateCommand<Feature> _featureClickedCommand;
+
+        public DelegateCommand<Feature> FeatureClickedCommand
+        {
+            get
+            {
+                return _featureClickedCommand ?? (_featureClickedCommand = new DelegateCommand<Feature>((feature) =>
+                {
+                    SelectedFeature.IsSelected = false;
+                    SelectedFeature = feature;
+                    SelectedFeature.IsSelected = true;
+                }));
+            }
+        }
+        #endregion  FeatureClickedCommand
+
         #region Proceed Command
         private DelegateCommand _proceedCommand;
 

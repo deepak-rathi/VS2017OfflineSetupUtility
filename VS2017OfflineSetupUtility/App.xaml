@@ -6,6 +6,12 @@
         <SolidColorBrush x:Key="BlackSolidColorBrush" Color="#2c3e50" />
         <!--Red color-->
         <SolidColorBrush x:Key="RedSolidColorBrush" Color="#e74c3c" />
+        <!--Green color-->
+        <SolidColorBrush x:Key="GreenSolidColorBrush" Color="#1abc9c" />
+        <!--Gray Color-->
+        <SolidColorBrush x:Key="GraySolidColorBrush" Color="#7f8c8d" />
+        <!--Blue Color-->
+        <SolidColorBrush x:Key="BlueSolidColorBrush" Color="#3498db" />
 
         <!--App Header TextBlock-->
         <Style x:Key="AppHeaderTextBlockStyle" TargetType="TextBlock">

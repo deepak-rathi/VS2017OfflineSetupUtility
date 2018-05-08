@@ -95,7 +95,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controls\DownloadUtilIcon.xaml.cs">
+      <DependentUpon>DownloadUtilIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CleanUtilIcon.xaml.cs">
+      <DependentUpon>CleanUtilIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\ValueWhenConverter.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\VSModule.cs" />
+    <Compile Include="Utils\FeatureUtil.cs" />
     <Compile Include="ViewModels\CleanUtilPageViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -141,6 +151,14 @@
     <Resource Include="Assets\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\DownloadUtilIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CleanUtilIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CleanUtilPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,5 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
