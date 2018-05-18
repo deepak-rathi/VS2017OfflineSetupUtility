@@ -180,18 +180,16 @@ namespace VS2017OfflineSetupUtility.ViewModels
 
         #endregion
 
-        #region Exit Command
-        //TODO://Instead of clossing application, allow user to navigate to previous page/back page in future.
-        private DelegateCommand _exitCommand;
+        #region GoBack Command
+        private DelegateCommand _goBackCommand;
 
-        public DelegateCommand ExitCommand
+        public DelegateCommand GoBackCommand
         {
             get
             {
-                return _exitCommand ?? (_exitCommand = new DelegateCommand(() =>
+                return _goBackCommand ?? (_goBackCommand = new DelegateCommand(() =>
                 {
-                    // Shutdown the application.
-                    Application.Current.Shutdown();
+                    App.CurrentFrame.GoBack();
                 }));
             }
         }

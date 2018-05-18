@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright © 2017-2018 Deepak Rathi 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see<http://www.gnu.org/licenses/> .
+ -->
 <!-- The name of the product -->
 <?define Name = "VS2017 Offline Setup Utility" ?>
 <!-- The Description of the product -->
@@ -6,7 +21,7 @@
 <!-- The manufacturer, for setup package publisher and folder info -->
 <?define Manufacturer = "Deepak Rathi" ?>
 <!-- The version number of this setup package-->
-<?define Version = "1.0.0" ?>
+<?define Version = "1.1.0" ?>
 <!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
 <?define UpgradeCode = "{a49a94d4-f09a-4e3b-9b7e-b058cddd504e}" ?>
 <!-- The name of the Cabinet -->
@@ -110,6 +125,9 @@
       </Component>
       <Component Id="System.Windows.Interactivity.dll" Guid="*">
         <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)System.Windows.Interactivity.dll" />
+      </Component>
+        <Component Id="Newtonsoft.Json.dll" Guid="*">
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Newtonsoft.Json.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

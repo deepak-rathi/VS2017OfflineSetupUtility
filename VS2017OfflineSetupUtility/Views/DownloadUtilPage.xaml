@@ -1,0 +1,188 @@
+﻿<!--
+    Copyright © 2017-2018 Deepak Rathi 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see<http://www.gnu.org/licenses/> .
+ -->
+<Page x:Class="VS2017OfflineSetupUtility.Views.DownloadUtilPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="clr-namespace:VS2017OfflineSetupUtility.Controls"
+      xmlns:prism="http://prismlibrary.com/"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1080"
+      Title="VS2017 Offline Setup Utility">
+
+    <Page.Resources>
+        <DataTemplate x:Key="WorkloadTemplate" >
+            <TreeViewItem IsExpanded="{Binding IsExpanded, Mode=TwoWay}" ItemsSource="{Binding Components}">
+                <TreeViewItem.Header>
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" IsEnabled="{Binding IsSelectable}" Content="{Binding FullName}" ToolTip="{Binding ID}" 
+                              Command="{Binding ElementName=mainGrid, Path=DataContext.WorkloadComponentChanged}"/>
+                </TreeViewItem.Header>
+                <TreeViewItem.ItemTemplate>
+                    <DataTemplate DataType="Component">
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" IsEnabled="{Binding Selectable}" Content="{Binding FullName}" ToolTip="{Binding ID}" 
+                                  Command="{Binding ElementName=mainGrid, Path=DataContext.WorkloadComponentChanged}"/>
+                    </DataTemplate>
+                </TreeViewItem.ItemTemplate>
+            </TreeViewItem>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid Background="White" x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#region  Header-->
+        <TextBlock Grid.Row="0" Text="VS2017 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource HorizontalSeperatorStyle}"/>
+        <!--#endregion Header-->
+
+        <!--#region Footer-->
+        <Grid Grid.Row="2" Background="#e2e2e2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="(C) 2017-2018 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
+                       Padding="20" TextWrapping="Wrap" Foreground="Gray"
+                       Grid.Column="0"/>
+            <Button Content="Download" Grid.Column="1" Width="80" Height="30" Background="{StaticResource GreenSolidColorBrush}" Margin="10" Foreground="White"
+                    Command="{Binding DownloadCommand}"/>
+            <Button Content="Go Back" Grid.Column="2" Width="80" Height="30" Background="White" Margin="10"
+                    Command="{Binding GoBackCommand}"/>
+        </Grid>
+        <!--#endregion Footer-->
+
+        <!--#region Content-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Left Content-->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="1. Select a folder to store offline files and select Visual Studio 2017 Edition" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="2. Select language, optional and recommended install option" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="3. Select Workload or customise it as per your need. &#x0a;Note*: If no checkbox is selected, all workload packages will be installed. &#x0a;Editor require atleast first two workloads to be selected if workload is customised." Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="4. Verify CLI command and click download. This will run CLI command in command prompt." Style="{StaticResource LeftContentTextBlockStyle}"/>
+            </StackPanel>
+            <!--#endregion Left Content-->
+
+            <Rectangle Grid.Column="1" Style="{StaticResource VerticalSeperatorStyle}"/>
+            <!--#region Center Content-->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition  />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                
+                <!--Select folder-->
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBox Text="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="17,10" MinHeight="30" Width="450" FontSize="14"
+                                 Grid.Row="2" Grid.Column="0"
+                                 VerticalContentAlignment="Center"/>
+
+                    <Button Content="Select Folder*" Background="{StaticResource GreenSolidColorBrush}" Foreground="White" Margin="10" Padding="10" FontSize="14" MaxWidth="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
+                            Command="{Binding SelectFolderCommand}"/>
+                </StackPanel>
+                
+                <!--VS Editions-->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select a Visual Studio 2017 Edition" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
+                    <RadioButton Grid.Row="1" Grid.Column="0" x:Name="community" Content="Community" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=community, Path=Content}" IsChecked="True"/>
+                    <RadioButton Grid.Row="1" Grid.Column="1" x:Name="professional" Content="Professional" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=professional, Path=Content}"/>
+                    <RadioButton Grid.Row="1" Grid.Column="2" x:Name="Enterprise" Content="Enterprise" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=Enterprise, Path=Content}"/>
+                </Grid>
+
+                <!--VS Language and Options-->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select Visual Studio 2017 language and options" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
+                    <ComboBox Grid.Row="1" Grid.Column="0" ToolTip="Select Visual Studio language to install" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                              ItemsSource="{Binding Languagelist}" SelectedItem="{Binding SelectedLanguage}"/>
+                    <CheckBox Grid.Row="1" Grid.Column="1" x:Name="recommended" Content="Recommended" ToolTip="Select recommended components for each workload" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                              Command="{Binding VsRecommendedCommand}" CommandParameter="{Binding ElementName=recommended, Path=IsChecked}"/>
+                    <CheckBox Grid.Row="1" Grid.Column="2" x:Name="optional" Content="Optional" ToolTip="Select optional components for each workload" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
+                              Command="{Binding VsOptionalCommand}" CommandParameter="{Binding ElementName=optional, Path=IsChecked}"/>
+                </Grid>
+                
+                <!--Workloads-->
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Select workload and packages :" Style="{StaticResource BodyTextBlockStyle}" Padding="17,5"/>
+                    <TreeView Grid.Row="1" Margin="17,0" ItemsSource="{Binding Workloads}" ItemTemplate="{StaticResource WorkloadTemplate}"/>
+                </Grid>
+                
+                <!--CLI command-->
+                <TextBlock Grid.Row="4" Text="Command Prompt will execute below command" Padding="17,10" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Grid.Row="5" Text="{Binding CliText, UpdateSourceTrigger=PropertyChanged}" Padding="17,5" Style="{StaticResource BodyTextBlockStyle}"/>
+            </Grid>
+            <!--#endregion Center Content-->
+
+            <Rectangle Grid.Column="3" Width="0.8" VerticalAlignment="Stretch" Fill="LightGray"/>
+            <!--#region Right Content-->
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="Selected feature details" Padding="14" Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock Text="Feature name" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,5"/>
+                <TextBlock Text="VS2017 Offline Download" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
+                <TextBlock Text="Download Visual Studio 2017 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
+                <TextBlock Text="1.1.0.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+            </StackPanel>
+            <!--#endregion Right Content-->
+        </Grid>
+        <!--#endregion Content-->
+    </Grid>
+</Page>

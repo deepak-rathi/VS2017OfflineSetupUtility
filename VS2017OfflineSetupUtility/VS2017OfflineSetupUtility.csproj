@@ -57,6 +57,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-ShellExtensions.1.1.1\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.6.3.0\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -103,14 +106,26 @@
     </Compile>
     <Compile Include="Converter\ValueWhenConverter.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\ComponentSetting.cs" />
+    <Compile Include="Models\Depedency.cs" />
     <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\VsEditionWorkloads.cs" />
+    <Compile Include="Models\VsEdition.cs" />
     <Compile Include="Models\VSModule.cs" />
+    <Compile Include="Models\Workload.cs" />
+    <Compile Include="Models\WorkloadProcesser.cs" />
     <Compile Include="Utils\FeatureUtil.cs" />
+    <Compile Include="Utils\VsEditionUtil.cs" />
     <Compile Include="ViewModels\CleanUtilPageViewModel.cs" />
+    <Compile Include="ViewModels\DownloadUtilPageViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\CleanUtilPage.xaml.cs">
       <DependentUpon>CleanUtilPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DownloadUtilPage.xaml.cs">
+      <DependentUpon>DownloadUtilPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -160,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CleanUtilPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DownloadUtilPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -103,10 +103,6 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
-                <TextBlock Grid.Row="2" Padding="17" TextWrapping="Wrap">
-                    <Run Text="Note*:" FontWeight="SemiBold" FontStyle="Italic"/>
-                    <Run Text="For now only VS2017 Offline Clean Util is available and its selected by default. Click Proceed button to continue."/>
-                </TextBlock>
             </Grid>
             <!--#endregion Center Content-->
 

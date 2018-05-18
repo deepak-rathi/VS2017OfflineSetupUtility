@@ -13,35 +13,29 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Prism.Mvvm;
-using System.Windows.Controls;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace VS2017OfflineSetupUtility.Models
 {
-    internal class Feature : BindableBase
+    internal class Workload
     {
-        public ContentControl Icon { get; set; }
+        public string ID { get; set; }
+        public string Description { get; set; }
         public string Name { get; set; }
-        public string About { get; set; }
-        public string Version { get; set; }
-        public Page NavigateToView { get; set; }
+        public List<Component> Components { get; } = new List<Component>();
 
-        #region IsSelected
-        private bool _isSelected;
-        public bool IsSelected
-        {
-            get { return _isSelected; }
-            set { SetProperty(ref _isSelected, value); }
-        }
-        #endregion
+        //Custom fields
+        [JsonIgnore]
+        public string FullName { get { return Name; } }
 
-        #region IsEnabled
-        private bool _isEnabled = true;
-        public bool IsEnabled
-        {
-            get { return _isEnabled; }
-            set { SetProperty(ref _isEnabled, value); }
-        }
-        #endregion
+        [JsonIgnore]
+        public bool IsSelectable { get { return !string.IsNullOrEmpty(ID); } }
+
+        [JsonIgnore]
+        public bool IsSelected { get; set; }
+
+        [JsonIgnore]
+        public bool IsExpanded { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _proceedCommand ?? (_proceedCommand = new DelegateCommand(() =>
                 {
-                    App.CurrentFrame.Navigate(new Views.CleanUtilPage());
+                    App.CurrentFrame.Navigate(Features.FirstOrDefault(feature=>feature.IsSelected).NavigateToView);
                 }));
             }
         }
