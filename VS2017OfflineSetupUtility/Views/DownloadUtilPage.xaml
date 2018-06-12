@@ -166,7 +166,7 @@
                 
                 <!--CLI command-->
                 <TextBlock Grid.Row="4" Text="Command Prompt will execute below command" Padding="17,10" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Grid.Row="5" Text="{Binding CliText, UpdateSourceTrigger=PropertyChanged}" Padding="17,5" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBox Grid.Row="5" Text="{Binding CliText, UpdateSourceTrigger=PropertyChanged}" Padding="17,5" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="WrapWithOverflow" Height="60" />
             </Grid>
             <!--#endregion Center Content-->
 
