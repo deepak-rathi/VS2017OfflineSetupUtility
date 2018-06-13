@@ -70,7 +70,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     try
                     {
                         CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                        dialog.InitialDirectory = "C:\\Users";
+                        dialog.InitialDirectory = Properties.Settings.Default.LastSelectedFolder;
                         dialog.IsFolderPicker = true;
                         dialog.AddToMostRecentlyUsedList = false;
                         dialog.Title = "Select VS2017 offline setup folder";
@@ -78,6 +78,8 @@ namespace VS2017OfflineSetupUtility.ViewModels
                         if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                         {
                             SelectedFolderPath = dialog.FileName;
+                            Properties.Settings.Default.LastSelectedFolder = SelectedFolderPath;
+                            Properties.Settings.Default.Save();
                             GenerateCli(allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(_selectedVsEdition)));
 
                         }

@@ -21,7 +21,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="VS2017 Offline Setup Utility" Height="720" Width="1080" MinWidth="800">
+        Title="VS2017 Offline Setup Utility" Height="720" Width="1080" MinWidth="800" WindowStartupLocation="CenterScreen">
 
     <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" />
 </Window>
