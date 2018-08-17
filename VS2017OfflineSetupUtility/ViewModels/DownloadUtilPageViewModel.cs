@@ -14,8 +14,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Prism.Commands;
-using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +23,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using VS2017OfflineSetupUtility.Models;
+using VS2017OfflineSetupUtility.Mvvm;
 using VS2017OfflineSetupUtility.Utils;
 
 namespace VS2017OfflineSetupUtility.ViewModels
@@ -36,12 +35,12 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #region Constructor
         public DownloadUtilPageViewModel()
         {
-            DownloadWorkloadFromWeb(_selectedVsEdition);
+            DownloadWorkloadFromWeb(SelectedVsEdition);
         }
         #endregion
 
         #region SelectedFolderPath
-        private string _selectedFolderPath = string.Empty;
+        private string _selectedFolderPath = Properties.Settings.Default.LastSelectedFolder;
         /// <summary>
         /// Contain SelectedFolderPath string
         /// </summary>
@@ -80,8 +79,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                             SelectedFolderPath = dialog.FileName;
                             Properties.Settings.Default.LastSelectedFolder = SelectedFolderPath;
                             Properties.Settings.Default.Save();
-                            GenerateCli(allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(_selectedVsEdition)));
-
+                            GenerateCli(allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(SelectedVsEdition)));
                         }
                     }
                     catch (Exception exception)
@@ -94,7 +92,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #endregion
 
         #region VsEdition
-        private string _selectedVsEdition = "Community";
+        public string SelectedVsEdition = "Community";
 
         private DelegateCommand<string> _vsEditionCommand;
 
@@ -104,8 +102,8 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _vsEditionCommand ?? (_vsEditionCommand = new DelegateCommand<string>((selectedContent) =>
                 {
-                    _selectedVsEdition = selectedContent;
-                    DownloadWorkloadFromWeb(_selectedVsEdition);
+                    SelectedVsEdition = selectedContent;
+                    DownloadWorkloadFromWeb(SelectedVsEdition);
                 }));
             }
         }
@@ -193,7 +191,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _workloadComponentChanged ?? (_workloadComponentChanged = new DelegateCommand(() =>
                 {
-                    GenerateCli(allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(_selectedVsEdition)));
+                    GenerateCli(allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(SelectedVsEdition)));
                 }));
             }
         }
@@ -263,7 +261,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _downloadCommand ?? (_downloadCommand = new DelegateCommand(() =>
                 {
-                    var selectedVsEdition = allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(_selectedVsEdition));
+                    var selectedVsEdition = allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(SelectedVsEdition));
                     var dirInfo = new DirectoryInfo(SelectedFolderPath);
                     var subdirInfo = dirInfo.CreateSubdirectory("Setup");
                     try

@@ -25,7 +25,7 @@ namespace VS2017OfflineSetupUtility.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%userprofile%")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastSelectedFolder {
             get {
                 return ((string)(this["LastSelectedFolder"]));

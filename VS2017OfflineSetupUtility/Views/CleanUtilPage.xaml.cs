@@ -26,5 +26,10 @@ namespace VS2017OfflineSetupUtility.Views
         {
             InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (this.DataContext as ViewModels.CleanUtilPageViewModel)?.DoClassification();
+        }
     }
 }

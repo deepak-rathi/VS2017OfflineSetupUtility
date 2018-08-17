@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="LastSelectedFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%userprofile%</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

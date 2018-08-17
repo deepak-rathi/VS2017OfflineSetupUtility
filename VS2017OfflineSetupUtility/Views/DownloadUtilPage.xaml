@@ -18,12 +18,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:Controls="clr-namespace:VS2017OfflineSetupUtility.Controls"
-      xmlns:prism="http://prismlibrary.com/"
-      prism:ViewModelLocator.AutoWireViewModel="True"
+      xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
-      Title="VS2017 Offline Setup Utility">
+      Title="VS2017 Offline Setup Utility" Loaded="Page_Loaded">
+
+    <Page.DataContext>
+        <viewModel:DownloadUtilPageViewModel/>
+    </Page.DataContext>
 
     <Page.Resources>
         <DataTemplate x:Key="WorkloadTemplate" >
@@ -41,7 +43,7 @@
             </TreeViewItem>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Grid Background="White" x:Name="mainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -102,7 +104,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                
+
                 <!--Select folder-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <TextBox Text="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -113,7 +115,7 @@
                     <Button Content="Select Folder*" Background="{StaticResource GreenSolidColorBrush}" Foreground="White" Margin="10" Padding="10" FontSize="14" MaxWidth="200" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
                             Command="{Binding SelectFolderCommand}"/>
                 </StackPanel>
-                
+
                 <!--VS Editions-->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
@@ -153,7 +155,7 @@
                     <CheckBox Grid.Row="1" Grid.Column="2" x:Name="optional" Content="Optional" ToolTip="Select optional components for each workload" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
                               Command="{Binding VsOptionalCommand}" CommandParameter="{Binding ElementName=optional, Path=IsChecked}"/>
                 </Grid>
-                
+
                 <!--Workloads-->
                 <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
@@ -163,7 +165,7 @@
                     <TextBlock Grid.Row="0" Text="Select workload and packages :" Style="{StaticResource BodyTextBlockStyle}" Padding="17,5"/>
                     <TreeView Grid.Row="1" Margin="17,0" ItemsSource="{Binding Workloads}" ItemTemplate="{StaticResource WorkloadTemplate}"/>
                 </Grid>
-                
+
                 <!--CLI command-->
                 <TextBlock Grid.Row="4" Text="Command Prompt will execute below command" Padding="17,10" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBox Grid.Row="5" Text="{Binding CliText, UpdateSourceTrigger=PropertyChanged}" Padding="17,5" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="WrapWithOverflow" Height="60" />

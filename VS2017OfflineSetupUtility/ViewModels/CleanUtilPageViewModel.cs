@@ -14,14 +14,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Prism.Commands;
-using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using VS2017OfflineSetupUtility.Models;
+using VS2017OfflineSetupUtility.Mvvm;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
@@ -57,7 +56,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #endregion
 
         #region SelectedFolderPath
-        private string _selectedFolderPath = default(string);
+        private string _selectedFolderPath = Properties.Settings.Default.LastSelectedFolder;
         /// <summary>
         /// Contain SelectedFolderPath string
         /// </summary>
@@ -96,49 +95,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                             SelectedFolderPath = dialog.FileName;
                             Properties.Settings.Default.LastSelectedFolder = SelectedFolderPath;
                             Properties.Settings.Default.Save();
-                            DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
-
-                            //classification
-                            var directories = dirInfo.GetDirectories();
-                            foreach (var directory in directories)
-                            {
-                                var vsModule = new VSModule();
-                                if (directory.Name.Contains(","))
-                                {
-                                    var stringSplit = directory.Name.Split(',').ToList();
-                                    vsModule.Name = stringSplit.FirstOrDefault();
-                                    vsModule.Version = stringSplit[1];
-                                    stringSplit.Remove(vsModule.Name);
-                                    stringSplit.Remove(vsModule.Version);
-                                    if (stringSplit.Count() > 0)
-                                    {
-                                        foreach (var item in stringSplit)
-                                            vsModule.Name = vsModule.Name + "," + item;
-                                    }
-                                }
-                                else
-                                {
-                                    continue;
-                                }
-                                vsModule.FullPath = directory.FullName;
-                                ModuleCollection.Add(vsModule);
-                            }
-
-                            //Select all the Modules with same name from ModuleCollection
-                            var duplicateModules =
-                            ModuleCollection.Where(module =>
-                            ModuleCollection
-                            .Except(new ObservableCollection<VSModule> { module })
-                            .Any(x => x.Name == module.Name)
-                            ).ToObservableCollection();
-
-                            //Get all the old version modules/folder from duplicateModules
-                            OldVersionModule =
-                            duplicateModules.Where(module =>
-                            duplicateModules
-                            .Except(new ObservableCollection<VSModule> { module })
-                            .Any(x => x.Name == module.Name && x.VersionObject.CompareTo(module.VersionObject) > 0)
-                            ).ToObservableCollection();
+                            DoClassification();
 
                             if (!OldVersionModule.Any())
                                 MessageBox.Show("Old version folder does not exist.");
@@ -150,6 +107,71 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     }
                 }));
             }
+        }
+
+        public void DoClassification()
+        {
+            if (string.IsNullOrWhiteSpace(SelectedFolderPath))
+                return;
+
+            ModuleCollection.Clear();
+            OldVersionModule.Clear();
+
+            DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
+            //classification
+            DirectoryInfo archiveDirectoryInfo = null;
+            var directories = dirInfo.GetDirectories();
+            foreach (var directory in directories)
+            {
+                var vsModule = new VSModule();
+                if (directory.Name.Contains(","))
+                {
+                    var stringSplit = directory.Name.Split(',').ToList();
+                    vsModule.Name = stringSplit.FirstOrDefault();
+                    vsModule.Version = stringSplit[1];
+                    stringSplit.Remove(vsModule.Name);
+                    stringSplit.Remove(vsModule.Version);
+                    if (stringSplit.Count() > 0)
+                    {
+                        foreach (var item in stringSplit)
+                            vsModule.Name = vsModule.Name + "," + item;
+                    }
+                }
+                else if (directory.Name.Equals("Archive"))
+                {
+                    archiveDirectoryInfo = directory;
+                }
+                else
+                {
+                    continue;
+                }
+                vsModule.FullPath = directory.FullName;
+                ModuleCollection.Add(vsModule);
+            }
+
+            //Select all the Modules with same name from ModuleCollection
+            var duplicateModules =
+            ModuleCollection.Where(module =>
+            ModuleCollection
+            .Except(new ObservableCollection<VSModule> { module })
+            .Any(x => x.Name == module.Name)
+            ).ToObservableCollection();
+
+            //Get all the old version modules/folder from duplicateModules
+            OldVersionModule =
+            duplicateModules.Where(module =>
+            duplicateModules
+            .Except(new ObservableCollection<VSModule> { module })
+            .Any(x => x.Name == module.Name && x.VersionObject.CompareTo(module.VersionObject) > 0)
+            ).ToObservableCollection();
+
+            //Add archive folder to old version module
+            if (archiveDirectoryInfo != null)
+                OldVersionModule.Add(new VSModule()
+                {
+                    FullPath = archiveDirectoryInfo.FullName,
+                    Name = archiveDirectoryInfo.Name
+                });
         }
         #endregion
 
@@ -170,6 +192,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                             Directory.Delete(folder.FullPath, true);
                         }
                         OldVersionModule.Clear();
+                        ModuleCollection.Clear();
                         MessageBox.Show("Operation successful.");
                     }
                     catch (Exception exception)

@@ -21,9 +21,9 @@
 <!-- The manufacturer, for setup package publisher and folder info -->
 <?define Manufacturer = "Deepak Rathi" ?>
 <!-- The version number of this setup package-->
-<?define Version = "1.1.0" ?>
+<?define Version = "1.2.0" ?>
 <!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
-<?define UpgradeCode = "{a49a94d4-f09a-4e3b-9b7e-b058cddd504e}" ?>
+<?define UpgradeCode = "a49a94d4-f09a-4e3b-9b7e-b058cddd504e" ?>
 <!-- The name of the Cabinet -->
 <?define CabName = "VS2017OfflineSetupUtil.cab" ?>
 
@@ -93,38 +93,12 @@
       <Component Id="VS2017OfflineSetupUtil_Application.exe.config" Guid="*">
         <File Id="VS2017OfflineSetupUtil_Application.exe.config" Name="VS2017OfflineSetupUtility.exe.config" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)VS2017OfflineSetupUtility.exe.config" />
       </Component>
-      <Component Id="Microsoft.Practices.ServiceLocation.dll" Guid="*">
-        <File Id="Microsoft.Practices.ServiceLocation.dll" Name="Microsoft.Practices.ServiceLocation.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.Practices.ServiceLocation.dll" />
-      </Component>
-      <Component Id="Microsoft.Practices.Unity.Configuration.dll" Guid="*">
-        <File Id="Microsoft.Practices.Unity.Configuration.dll" Name="Microsoft.Practices.Unity.Configuration.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.Practices.Unity.Configuration.dll" />
-      </Component>
-      <Component Id="Microsoft.Practices.Unity.dll" Guid="*">
-        <File Id="Microsoft.Practices.Unity.dll" Name="Microsoft.Practices.Unity.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.Practices.Unity.dll" />
-      </Component>
-      <Component Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Guid="*">
-        <File Id="Microsoft.Practices.Unity.RegistrationByConvention.dll" Name="Microsoft.Practices.Unity.RegistrationByConvention.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.Practices.Unity.RegistrationByConvention.dll" />
-      </Component>
+      
       <Component Id="Microsoft.WindowsAPICodePack.dll" Guid="*">
         <File Id="Microsoft.WindowsAPICodePack.dll" Name="Microsoft.WindowsAPICodePack.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.WindowsAPICodePack.dll" />
       </Component>
       <Component Id="Microsoft.WindowsAPICodePack.Shell.dll" Guid="*">
         <File Id="Microsoft.WindowsAPICodePack.Shell.dll" Name="Microsoft.WindowsAPICodePack.Shell.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
-      </Component>
-      <Component Id="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Guid="*">
-        <File Id="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Name="Microsoft.WindowsAPICodePack.ShellExtensions.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
-      </Component>
-      <Component Id="Prism.dll" Guid="*">
-        <File Id="Prism.dll" Name="Prism.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Prism.dll" />
-      </Component>
-      <Component Id="Prism.Unity.Wpf.dll" Guid="*">
-        <File Id="Prism.Unity.Wpf.dll" Name="Prism.Unity.Wpf.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Prism.Unity.Wpf.dll" />
-      </Component>
-      <Component Id="Prism.Wpf.dll" Guid="*">
-        <File Id="Prism.Wpf.dll" Name="Prism.Wpf.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Prism.Wpf.dll" />
-      </Component>
-      <Component Id="System.Windows.Interactivity.dll" Guid="*">
-        <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)System.Windows.Interactivity.dll" />
       </Component>
         <Component Id="Newtonsoft.Json.dll" Guid="*">
         <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.VS2017OfflineSetupUtil_Application_TargetDir)Newtonsoft.Json.dll" />

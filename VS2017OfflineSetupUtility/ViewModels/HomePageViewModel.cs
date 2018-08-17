@@ -13,12 +13,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Prism.Commands;
-using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using VS2017OfflineSetupUtility.Models;
+using VS2017OfflineSetupUtility.Mvvm;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
