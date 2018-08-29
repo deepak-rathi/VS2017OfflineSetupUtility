@@ -24,56 +24,62 @@ namespace VS2017OfflineSetupUtility.Models
         internal static void ProcessMarkDownText(string markDownText, List<Workload> Workloads)
         {
             Workloads.Clear();
-
-            Workload workload = null;
-
-            var markDownTextLines = markDownText.Replace("\r", "").Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-            for (int i = 0; i < markDownTextLines.Length;)
+            try
             {
-                var line = markDownTextLines[i].Trim();
-                if (line.Length > 3 && line.Substring(0, 3) == "## ")
+                Workload workload = null;
+
+                var markDownTextLines = markDownText.Replace("\r", "").Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < markDownTextLines.Length;)
                 {
-                    //Break when reached get support text
-                    if (line.Substring(3).ToLower().Equals("get support"))
-                        break;
-
-                    //Workload title as Name
-                    workload = new Workload() { Name = line.Substring(3) };
-
-                    var secondLine = markDownTextLines[++i];
-                    if (secondLine.Substring(0, 8) == "**ID:** ")
+                    var line = markDownTextLines[i].Trim();
+                    if (line.Length > 3 && line.Substring(0, 3) == "## ")
                     {
-                        workload.ID = secondLine.Substring(7);
-                        workload.Description = markDownTextLines[++i].Replace("**Description:** ", "");
+                        //Break when reached get support text
+                        if (line.Substring(3).ToLower().Equals("get support"))
+                            break;
+
+                        //Workload title as Name
+                        workload = new Workload() { Name = line.Substring(3) };
+
+                        var secondLine = markDownTextLines[++i];
+                        if (secondLine.Substring(0, 8) == "**ID:** ")
+                        {
+                            workload.ID = secondLine.Substring(7);
+                            workload.Description = markDownTextLines[++i].Replace("**Description:** ", "");
+                        }
+                        else
+                        {
+                            // non-workload components
+                            workload.Description = secondLine;
+                        }
+
+                        //Skip text and increment i
+                        while (i < markDownTextLines.Length && markDownTextLines[i++].Substring(0, 5) != "--- |") { }
+                        //get all components for this workload
+                        while (markDownTextLines[i].Substring(0, 3) != "## ")
+                        {
+                            var thirdLine = markDownTextLines[i++].Split('|');
+                            var component = new Component()
+                            {
+                                ID = thirdLine[0].Trim(),
+                                Name = thirdLine[1],
+                                Version = thirdLine[2],
+                                Depedency = thirdLine.Length > 3 ? (Depedency)Enum.Parse(typeof(Depedency), thirdLine[3], true) : Depedency.Independent,
+                                CommponentWorkload = workload,
+                            };
+                            workload.Components.Add(component);
+                        }
+
+                        Workloads.Add(workload);
                     }
                     else
-                    {
-                        // non-workload components
-                        workload.Description = secondLine;
-                    }
+                        i++;
 
-                    //Skip text and increment i
-                    while (i < markDownTextLines.Length && markDownTextLines[i++].Substring(0, 5) != "--- |") { } 
-                    //get all components for this workload
-                    while (markDownTextLines[i].Substring(0, 3) != "## ")
-                    {
-                        var thirdLine = markDownTextLines[i++].Split('|');
-                        var component = new Component()
-                        {
-                            ID = thirdLine[0].Trim(),
-                            Name = thirdLine[1],
-                            Version = thirdLine[2],
-                            Depedency = thirdLine.Length > 3 ? (Depedency)Enum.Parse(typeof(Depedency), thirdLine[3], true) : Depedency.Independent,
-                            CommponentWorkload = workload,
-                        };
-                        workload.Components.Add(component);
-                    }
-
-                    Workloads.Add(workload);
                 }
-                else
-                    i++;
+            }
+            catch (Exception exception)
+            {
 
             }
         }
