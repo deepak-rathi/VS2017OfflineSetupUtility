@@ -55,7 +55,7 @@ namespace VS2017OfflineSetupUtility.Models
         public void GenerateCLICommand(string vsEdition, string filePath, string language, bool IsRecommendedSelected, bool IsOptionalSelected)
         {
             var exe = "vs_" + vsEdition + ".exe ";
-            var layout = "--layout " + filePath + " ";
+            var layout = "--layout \"" + filePath + "\" ";
             var body = new List<string>();
             var suffix = "";
             var lang = "--lang " + language;
