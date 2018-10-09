@@ -227,7 +227,11 @@ namespace VS2017OfflineSetupUtility.ViewModels
             string markdownText = null;
             try
             {
-                markdownText = new WebClient().DownloadString(selectedVsEdition.WorkloadGitHubUri);
+                WebClient webClient = new WebClient();
+                IWebProxy webProxy = WebRequest.DefaultWebProxy;
+                webProxy.Credentials = CredentialCache.DefaultCredentials;
+                webClient.Proxy = webProxy;
+                markdownText = webClient.DownloadString(selectedVsEdition.WorkloadGitHubUri);
 
             }
             catch (Exception exception)
@@ -266,8 +270,12 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     var subdirInfo = dirInfo.CreateSubdirectory("Setup");
                     try
                     {
+                        WebClient webClient = new WebClient();
+                        IWebProxy webProxy = WebRequest.DefaultWebProxy;
+                        webProxy.Credentials = CredentialCache.DefaultCredentials;
+                        webClient.Proxy = webProxy;
                         //Download Setup exe from web
-                        new WebClient().DownloadFile(new Uri(selectedVsEdition.SetupUri), subdirInfo.FullName + @"\vs_" + selectedVsEdition.Name + ".exe");
+                        webClient.DownloadFile(new Uri(selectedVsEdition.SetupUri), subdirInfo.FullName + @"\vs_" + selectedVsEdition.Name + ".exe");
                         File.WriteAllText(subdirInfo.FullName + @"\CliCommand.bat", CliText);
                         Process.Start(new ProcessStartInfo()
                         {
