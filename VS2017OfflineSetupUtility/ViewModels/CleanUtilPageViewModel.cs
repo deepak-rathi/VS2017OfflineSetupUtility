@@ -18,6 +18,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using VS2017OfflineSetupUtility.Models;
 using VS2017OfflineSetupUtility.Mvvm;
@@ -182,18 +183,25 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _deleteOldVersionCommand ?? (_deleteOldVersionCommand = new DelegateCommand(() =>
+                return _deleteOldVersionCommand ?? (_deleteOldVersionCommand = new DelegateCommand(async () =>
                 {
                     try
                     {
                         //Delete old version folder and files
-                        foreach (var folder in OldVersionModule)
+                        await Task.Run(() =>
                         {
-                            Directory.Delete(folder.FullPath, true);
-                        }
-                        OldVersionModule.Clear();
-                        ModuleCollection.Clear();
-                        MessageBox.Show("Operation successful.");
+                            foreach (var folder in OldVersionModule)
+                            {
+                                Directory.Delete(folder.FullPath, true);
+                            }
+                        }).ConfigureAwait(false);
+
+                        App.Current.Dispatcher.Invoke(() =>
+                         {
+                             OldVersionModule.Clear();
+                             ModuleCollection.Clear();
+                             MessageBox.Show("Operation successful.");
+                         });
                     }
                     catch (Exception exception)
                     {

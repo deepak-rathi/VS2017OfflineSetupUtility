@@ -57,9 +57,12 @@ namespace VS2017OfflineSetupUtility.Models
                         //Skip text and increment i
                         while (i < markDownTextLines.Length && markDownTextLines[i++].Substring(0, 5) != "--- |") { }
                         //get all components for this workload
-                        while (markDownTextLines[i].Substring(0, 3) != "## ")
+                        while (i < markDownTextLines.Length && markDownTextLines[i].Substring(0, 3) != "## ")
                         {
                             var thirdLine = markDownTextLines[i++].Split('|');
+                            if (thirdLine.Length < 3)
+                                continue;
+
                             var component = new Component()
                             {
                                 ID = thirdLine[0].Trim(),
@@ -78,7 +81,7 @@ namespace VS2017OfflineSetupUtility.Models
 
                 }
             }
-            catch (Exception exception)
+            catch
             {
 
             }
