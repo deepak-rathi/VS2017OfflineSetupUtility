@@ -30,7 +30,7 @@ namespace VS2017OfflineSetupUtility.Utils
             var cleanUtilIcon = new CleanUtilIcon() { IsCheckedColor = (SolidColorBrush)App.Current.Resources["BlueSolidColorBrush"]};
             cleanUtilIcon.SetBinding(CleanUtilIcon.IsCheckedProperty, new System.Windows.Data.Binding("IsSelected") { UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged});
 
-            var cleanUtilFeature = new Feature() { Icon =  cleanUtilIcon, Name = "VS2017 Offline Clean Util", About= "Allow deletion of old version Visual Studio 2017 Offline Setup files and folder, which saves your hard disk space.", Version="1.3.0.0", NavigateToView = new Views.CleanUtilPage() , IsSelected = true};
+            var cleanUtilFeature = new Feature() { Icon =  cleanUtilIcon, Name = "VS2017 Offline Clean Util", About= "Allow deletion of old version Visual Studio 2017 Offline Setup files and folder, which saves your hard disk space.", Version="1.3.2.0", NavigateToView = new Views.CleanUtilPage() , IsSelected = true};
 
             #endregion
 
@@ -38,7 +38,7 @@ namespace VS2017OfflineSetupUtility.Utils
             var downloadUtilIcon = new DownloadUtilIcon() { IsCheckedColor = (SolidColorBrush)App.Current.Resources["BlueSolidColorBrush"]};
             downloadUtilIcon.SetBinding(DownloadUtilIcon.IsCheckedProperty, new System.Windows.Data.Binding("IsSelected") { UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged });
 
-            var downloadUtilFeature = new Feature() { Icon = downloadUtilIcon, Name = "VS2017 Offline Download", About = "Download Visual Studio 2017 Offline Setup files and folder, using command line interface. (Need internet connection)", Version = "1.3.0.0" , NavigateToView  = new Views.DownloadUtilPage()};
+            var downloadUtilFeature = new Feature() { Icon = downloadUtilIcon, Name = "VS2017 Offline Download", About = "Download Visual Studio 2017 Offline Setup files and folder, using command line interface. (Need internet connection)", Version = "1.3.2.0" , NavigateToView  = new Views.DownloadUtilPage()};
 
             #endregion
 

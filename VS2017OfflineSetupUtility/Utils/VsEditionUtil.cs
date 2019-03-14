@@ -27,21 +27,21 @@ namespace VS2017OfflineSetupUtility.Utils
                 new VsEdition() {
                 Name = "Community",
                 SetupUri = "https://aka.ms/vs/15/release/vs_community.exe",
-                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community",
-                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-community.md",
+                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community?view=vs-2017",
+                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2017/workload-component-id-vs-community.md",
                 },
 
                 new VsEdition() {
                 Name = "Professional",
                 SetupUri = "https://aka.ms/vs/15/release/vs_professional.exe",
-                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional",
-                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-professional.md",
+                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional?view=vs-2017",
+                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2017/workload-component-id-vs-professional.md",
                 },
                 new VsEdition()  {
                 Name = "Enterprise",
                 SetupUri = "https://aka.ms/vs/15/release/vs_enterprise.exe",
-                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise",
-                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/workload-component-id-vs-enterprise.md",
+                WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2017",
+                WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2017/workload-component-id-vs-enterprise.md",
                 },
             };
         }
