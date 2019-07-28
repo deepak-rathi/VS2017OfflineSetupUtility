@@ -119,6 +119,13 @@ namespace VS2017OfflineSetupUtility.ViewModels
             OldVersionModule.Clear();
 
             DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
+            if(dirInfo!=null && !dirInfo.Exists)
+            {
+                Properties.Settings.Default.LastSelectedFolder = "";
+                SelectedFolderPath = "";
+                return;
+            }
+
             //classification
             DirectoryInfo archiveDirectoryInfo = null;
             var directories = dirInfo.GetDirectories();

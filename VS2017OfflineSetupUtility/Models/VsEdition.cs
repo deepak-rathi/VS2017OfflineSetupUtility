@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright © 2017-2018 Deepak Rathi 
+    Copyright © 2017-2019 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -23,13 +23,12 @@ namespace VS2017OfflineSetupUtility.Models
 {
     internal class VsEdition
     {
-        public string Name;
+        public string Name { get; set; }
+        public string Version;
         public string SetupUri;
         public string WorkloadGitHubUri;
         public string WorkloadDocUri;
-        
         public VsEditionWorkloads vsEditonWorkloads = new VsEditionWorkloads();
-
         public string CliToDownload, CliToInstall;
 
         public void LoadJSON()
@@ -54,7 +53,7 @@ namespace VS2017OfflineSetupUtility.Models
 
         public void GenerateCLICommand(string vsEdition, string filePath, string language, bool IsRecommendedSelected, bool IsOptionalSelected)
         {
-            var exe = "vs_" + vsEdition + ".exe ";
+            var exe = vsEdition.Replace(' ', '_') + ".exe ";
             var layout = "--layout \"" + filePath + "\" ";
             var body = new List<string>();
             var suffix = "";

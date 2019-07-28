@@ -21,7 +21,7 @@
       xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
-      Title="VS2017 Offline Setup Utility" Loaded="Page_Loaded">
+      Title="VS2017/2019 Offline Setup Utility" Loaded="Page_Loaded">
 
     <Page.DataContext>
         <viewModel:DownloadUtilPageViewModel/>
@@ -52,7 +52,7 @@
         </Grid.RowDefinitions>
 
         <!--#region  Header-->
-        <TextBlock Grid.Row="0" Text="VS2017 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Text="VS2017/2019 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource HorizontalSeperatorStyle}"/>
         <!--#endregion Header-->
 
@@ -86,7 +86,7 @@
 
             <!--#region Left Content-->
             <StackPanel Grid.Column="0">
-                <TextBlock Text="1. Select a folder to store offline files and select Visual Studio 2017 Edition" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="1. Select a folder to store offline files and select Visual Studio 2017/2019 Edition" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="2. Select language, optional and recommended install option" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="3. Select Workload or customise it as per your need. &#x0a;Note*: If no checkbox is selected, all workload packages will be installed. &#x0a;Editor require atleast first two workloads to be selected if workload is customised." Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="4. Verify CLI command and click download. This will run CLI command in command prompt." Style="{StaticResource LeftContentTextBlockStyle}"/>
@@ -127,13 +127,8 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select a Visual Studio 2017 Edition" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
-                    <RadioButton Grid.Row="1" Grid.Column="0" x:Name="community" Content="Community" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
-                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=community, Path=Content}" IsChecked="True"/>
-                    <RadioButton Grid.Row="1" Grid.Column="1" x:Name="professional" Content="Professional" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
-                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=professional, Path=Content}"/>
-                    <RadioButton Grid.Row="1" Grid.Column="2" x:Name="Enterprise" Content="Enterprise" GroupName="VsEdition" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
-                                 Command="{Binding VsEditionCommand}" CommandParameter="{Binding ElementName=Enterprise, Path=Content}"/>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select a Visual Studio Edition" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
+                    <ComboBox Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding AllVisualStudioEditions, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedVsEdition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="17,0" DisplayMemberPath="Name"/>
                 </Grid>
 
                 <!--VS Language and Options-->
@@ -147,7 +142,7 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select Visual Studio 2017 language and options" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Please select Visual Studio language and options" Style="{StaticResource BodyTextBlockStyle}" Padding="17,10" />
                     <ComboBox Grid.Row="1" Grid.Column="0" ToolTip="Select Visual Studio language to install" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
                               ItemsSource="{Binding Languagelist}" SelectedItem="{Binding SelectedLanguage}"/>
                     <CheckBox Grid.Row="1" Grid.Column="1" x:Name="recommended" Content="Recommended" ToolTip="Select recommended components for each workload" Foreground="{StaticResource BlackSolidColorBrush}" Margin="17,0"
@@ -177,11 +172,11 @@
             <StackPanel Grid.Column="4">
                 <TextBlock Text="Selected feature details" Padding="14" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBlock Text="Feature name" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,5"/>
-                <TextBlock Text="VS2017 Offline Download" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="VS2017/2019 Offline Download" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="Download Visual Studio 2017 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="Download Visual Studio 2017/2019 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="1.3.2.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="1.4.0.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
             </StackPanel>
             <!--#endregion Right Content-->
         </Grid>

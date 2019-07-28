@@ -20,7 +20,7 @@ namespace VS2017OfflineSetupUtility.Views
             if (viewModel == null)
                 return;
 
-            viewModel.GenerateCli(viewModel.allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(viewModel.SelectedVsEdition)));
+            viewModel.GenerateCli(viewModel.SelectedVsEdition);
         }
     }
 }

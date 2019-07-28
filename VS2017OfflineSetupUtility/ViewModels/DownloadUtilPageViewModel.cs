@@ -30,12 +30,15 @@ namespace VS2017OfflineSetupUtility.ViewModels
 {
     class DownloadUtilPageViewModel : BindableBase
     {
-        public List<VsEdition> allVisualStudioEditions = VsEditionUtil.GetAllVisualStudioEditions();
+        public List<VsEdition> AllVisualStudioEditions { get; set; }
 
         #region Constructor
         public DownloadUtilPageViewModel()
         {
+            AllVisualStudioEditions = VsEditionUtil.GetAllVisualStudioEditions();
+            SelectedVsEdition = AllVisualStudioEditions.FirstOrDefault();
             DownloadWorkloadFromWeb(SelectedVsEdition);
+            CheckIfPreviouslySelectedFolderStillExist();
         }
         #endregion
 
@@ -79,7 +82,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                             SelectedFolderPath = dialog.FileName;
                             Properties.Settings.Default.LastSelectedFolder = SelectedFolderPath;
                             Properties.Settings.Default.Save();
-                            GenerateCli(allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(SelectedVsEdition)));
+                            GenerateCli(SelectedVsEdition);
                         }
                     }
                     catch (Exception exception)
@@ -91,23 +94,41 @@ namespace VS2017OfflineSetupUtility.ViewModels
         }
         #endregion
 
-        #region VsEdition
-        public string SelectedVsEdition = "Community";
-
-        private DelegateCommand<string> _vsEditionCommand;
-
-        public DelegateCommand<string> VsEditionCommand
+        #region CheckIfPreviouslySelectedFolderStillExist
+        /// <summary>
+        /// Check if previously selected folder still exist, if not reset last selected folder value
+        /// </summary>
+        private void CheckIfPreviouslySelectedFolderStillExist()
         {
-            get
+            var lastSelectedFolder = Properties.Settings.Default.LastSelectedFolder;
+            if (string.IsNullOrWhiteSpace(lastSelectedFolder))
+                return;
+
+            DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
+            if (dirInfo != null && !dirInfo.Exists)
             {
-                return _vsEditionCommand ?? (_vsEditionCommand = new DelegateCommand<string>((selectedContent) =>
-                {
-                    SelectedVsEdition = selectedContent;
-                    DownloadWorkloadFromWeb(SelectedVsEdition);
-                }));
+                Properties.Settings.Default.LastSelectedFolder = "";
+                SelectedFolderPath = "";
+                return;
             }
         }
+        #endregion
 
+        #region VsEdition
+        private VsEdition _vsEdition;
+
+        public VsEdition SelectedVsEdition
+        {
+            get { return _vsEdition; }
+            set
+            {
+                if (SetProperty(ref _vsEdition, value) && value != null)
+                {
+                    DownloadWorkloadFromWeb(value);
+                    GenerateCli(SelectedVsEdition);
+                }
+            }
+        }
         #endregion
 
         #region Language
@@ -191,7 +212,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _workloadComponentChanged ?? (_workloadComponentChanged = new DelegateCommand(() =>
                 {
-                    GenerateCli(allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(SelectedVsEdition)));
+                    GenerateCli(SelectedVsEdition);
                 }));
             }
         }
@@ -221,29 +242,26 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #endregion
 
         #region Download Workload from web
-        private void DownloadWorkloadFromWeb(string vsEdition)
+        private void DownloadWorkloadFromWeb(VsEdition vsEdition)
         {
-            var selectedVsEdition = allVisualStudioEditions.FirstOrDefault(edition => edition.Name.Equals(vsEdition));
-            string markdownText = null;
             try
             {
                 WebClient webClient = new WebClient();
                 IWebProxy webProxy = WebRequest.DefaultWebProxy;
                 webProxy.Credentials = CredentialCache.DefaultCredentials;
                 webClient.Proxy = webProxy;
-                markdownText = webClient.DownloadString(selectedVsEdition.WorkloadGitHubUri);
+                var markdownText = webClient.DownloadString((string)vsEdition.WorkloadGitHubUri);
 
+                WorkloadProcesser.ProcessMarkDownText(markdownText, (List<Workload>)vsEdition.vsEditonWorkloads.Workloads);
+                vsEdition.SaveAllWorkloadsToFile();
+                Workloads = vsEdition.vsEditonWorkloads.Workloads.ToObservableCollection();
+                GenerateCli(vsEdition);
             }
             catch (Exception exception)
             {
                 MessageBox.Show("Error occured:" + exception.GetType().ToString() + ".Make sure internet connection is available.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            WorkloadProcesser.ProcessMarkDownText(markdownText, selectedVsEdition.vsEditonWorkloads.Workloads);
-            selectedVsEdition.SaveAllWorkloadsToFile();
-            Workloads = selectedVsEdition.vsEditonWorkloads.Workloads.ToObservableCollection();
-            GenerateCli(selectedVsEdition);
         }
 
         #endregion
@@ -265,7 +283,6 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _downloadCommand ?? (_downloadCommand = new DelegateCommand(() =>
                 {
-                    var selectedVsEdition = allVisualStudioEditions.FirstOrDefault(f => f.Name.Equals(SelectedVsEdition));
                     var dirInfo = new DirectoryInfo(SelectedFolderPath);
                     var subdirInfo = dirInfo.CreateSubdirectory("Setup");
                     try
@@ -275,7 +292,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                         webProxy.Credentials = CredentialCache.DefaultCredentials;
                         webClient.Proxy = webProxy;
                         //Download Setup exe from web
-                        webClient.DownloadFile(new Uri(selectedVsEdition.SetupUri), subdirInfo.FullName + @"\vs_" + selectedVsEdition.Name + ".exe");
+                        webClient.DownloadFile(new Uri(SelectedVsEdition.SetupUri), subdirInfo.FullName + @"\" + SelectedVsEdition.Name.Replace(' ', '_') + ".exe");
                         File.WriteAllText(subdirInfo.FullName + @"\CliCommand.bat", CliText);
                         Process.Start(new ProcessStartInfo()
                         {
@@ -287,6 +304,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     {
                         MessageBox.Show("Error occured:" + exception.GetType().ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+
                 }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath)));
             }
         }
