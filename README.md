@@ -1,4 +1,4 @@
-# VS2017OfflineSetupUtility
+# VS2017/2019OfflineSetupUtility
 This utility allow deletion of old version Visual Studio 2017/2019 Offline Setup files and folder.
 This utility also allow selecting your own workload and download offline setup for Visual Studio 2017/2019
 
