@@ -38,7 +38,7 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited" Description="$(var.Name)" Manufacturer="$(var.Manufacturer)" />
 
     <!--Application logo-->
-    <Icon Id="Logo.ico" SourceFile="$(var.VS2017OfflineSetupUtility.TargetDir)\logo.ico" />
+    <Icon Id="Logo.ico" SourceFile="$(var.VS2017OfflineSetupUtility.TargetDir)\..\..\Assets\logo.ico" />
 
     <!--Application logo for Control Panel-->
     <Property Id="ARPPRODUCTICON" Value="Logo.ico" />
