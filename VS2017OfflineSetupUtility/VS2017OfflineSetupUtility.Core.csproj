@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>VS2017OfflineSetupUtility.App</StartupObject>
+    <Version>1.4.1</Version>
+    <Product>VS2017 Offline Setup Utility</Product>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <Company />
+    <Authors>Deepak Rathi</Authors>
+    <PackageIcon></PackageIcon>
+    <RepositoryUrl>https://github.com/deepak-rathi/VS2017OfflineSetupUtility</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>Added .Net Core 3.1</PackageReleaseNotes>
+    <PackageId>VS2017OfflineSetupUtility</PackageId>
+    <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Copyright ©  2017-2020 Deepak Rathi</Copyright>
+    <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019 Offline Setup files and folder.</Description>
+    <AssemblyName>VS2017OfflineSetupUtility</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\logo.ico" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\logo.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

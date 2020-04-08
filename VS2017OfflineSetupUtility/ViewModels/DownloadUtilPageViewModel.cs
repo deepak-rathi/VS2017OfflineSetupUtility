@@ -13,7 +13,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,12 +37,11 @@ namespace VS2017OfflineSetupUtility.ViewModels
             AllVisualStudioEditions = VsEditionUtil.GetAllVisualStudioEditions();
             SelectedVsEdition = AllVisualStudioEditions.FirstOrDefault();
             DownloadWorkloadFromWeb(SelectedVsEdition);
-            CheckIfPreviouslySelectedFolderStillExist();
         }
         #endregion
 
         #region SelectedFolderPath
-        private string _selectedFolderPath = Properties.Settings.Default.LastSelectedFolder;
+        private string _selectedFolderPath;
         /// <summary>
         /// Contain SelectedFolderPath string
         /// </summary>
@@ -69,47 +67,27 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _selectFolderCommand ?? (_selectFolderCommand = new DelegateCommand(() =>
                 {
+                    var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
                     try
                     {
-                        CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                        dialog.InitialDirectory = Properties.Settings.Default.LastSelectedFolder;
-                        dialog.IsFolderPicker = true;
-                        dialog.AddToMostRecentlyUsedList = false;
-                        dialog.Title = "Select VS2017 offline setup folder";
+                        folderBrowserDialog.Description = "Select VS2017 or VS2019 offline setup folder";
 
-                        if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                        {
-                            SelectedFolderPath = dialog.FileName;
-                            Properties.Settings.Default.LastSelectedFolder = SelectedFolderPath;
-                            Properties.Settings.Default.Save();
-                            GenerateCli(SelectedVsEdition);
-                        }
+                        var dialogResult = folderBrowserDialog.ShowDialog();
+                        if (dialogResult != System.Windows.Forms.DialogResult.OK && string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+                            return;
+
+                        SelectedFolderPath = folderBrowserDialog.SelectedPath;
+                        GenerateCli(SelectedVsEdition);
                     }
                     catch (Exception exception)
                     {
                         System.Diagnostics.Debug.WriteLine(exception.Message);
                     }
+                    finally
+                    {
+                        folderBrowserDialog.Dispose();
+                    }
                 }));
-            }
-        }
-        #endregion
-
-        #region CheckIfPreviouslySelectedFolderStillExist
-        /// <summary>
-        /// Check if previously selected folder still exist, if not reset last selected folder value
-        /// </summary>
-        private void CheckIfPreviouslySelectedFolderStillExist()
-        {
-            var lastSelectedFolder = Properties.Settings.Default.LastSelectedFolder;
-            if (string.IsNullOrWhiteSpace(lastSelectedFolder))
-                return;
-
-            DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
-            if (dirInfo != null && !dirInfo.Exists)
-            {
-                Properties.Settings.Default.LastSelectedFolder = "";
-                SelectedFolderPath = "";
-                return;
             }
         }
         #endregion
