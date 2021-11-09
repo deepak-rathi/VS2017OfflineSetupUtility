@@ -4,7 +4,7 @@ This utility also allow selecting your own workload and download offline setup f
 
 You can download and run the program your self by building from source code or just download the "[Setup](https://github.com/deepak-rathi/VS2017OfflineSetupUtility/releases)" and run "VS2017OfflineSetupUtility.exe".
 
-Application Screeshots(old):
+Application Screeshots:
 
 ![alt tag](https://github.com/deepak-rathi/VS2017OfflineSetupUtility/blob/master/Screenshots/HomePage.PNG)
 
