@@ -1,5 +1,5 @@
 ﻿<!--
-    Copyright © 2017-2019 Deepak Rathi 
+    Copyright © 2017-2021 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -20,7 +20,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
         mc:Ignorable="d"
-        Title="VS2017/2019 Offline Setup Utility" Height="720" Width="1080" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="VS2017/2019/2022 Offline Setup Utility" Height="720" Width="1080" MinWidth="800" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>

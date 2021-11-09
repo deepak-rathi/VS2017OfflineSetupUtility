@@ -70,7 +70,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
                     try
                     {
-                        folderBrowserDialog.Description = "Select VS2017 or VS2019 offline setup folder";
+                        folderBrowserDialog.Description = "Select VS2017 or VS2019 or VS2022 offline setup folder";
 
                         var dialogResult = folderBrowserDialog.ShowDialog();
                         if (dialogResult != System.Windows.Forms.DialogResult.OK && string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))

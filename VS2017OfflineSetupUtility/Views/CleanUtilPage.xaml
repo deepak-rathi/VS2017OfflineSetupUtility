@@ -1,5 +1,5 @@
 ﻿<!--
-    Copyright © 2017-2019 Deepak Rathi 
+    Copyright © 2017-2021 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -21,7 +21,7 @@
       xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
-      Title="VS2017/2019 Offline Clean Util" Loaded="Page_Loaded">
+      Title="VS2017/2019/2022 Offline Clean Util" Loaded="Page_Loaded">
 
     <Page.DataContext>
         <viewModel:CleanUtilPageViewModel/>
@@ -43,7 +43,7 @@
         </Grid.RowDefinitions>
 
         <!--#region  Header-->
-        <TextBlock Grid.Row="0" Text="VS2017/2019 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Text="VS2017/2019/2022 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource HorizontalSeperatorStyle}"/>
         <!--#endregion Header-->
 
@@ -55,7 +55,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="(C) 2017-2019 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
+            <TextBlock Text="(C) 2017-2021 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
                        Padding="20" TextWrapping="Wrap" Foreground="Gray"
                        Grid.Column="0"/>
             <Button Content="Delete" Grid.Column="1" Width="80" Height="30" Background="{StaticResource RedSolidColorBrush}" Margin="10" Foreground="White"
@@ -77,7 +77,7 @@
 
             <!--#region Left Content-->
             <StackPanel Grid.Column="0">
-                <TextBlock Text="1. Select Visual Studio 2017/2019 Offline Setup Folder" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="1. Select Visual Studio 2017/2019/2022 Offline Setup Folder" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="2. Verify list of old folders with version number" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="3. Delete directories with old version from offline setup folder" Style="{StaticResource LeftContentTextBlockStyle}"/>
             </StackPanel>
@@ -91,7 +91,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="This utility allow deletion of old version Visual Studio 2017/2019 Offline Setup files" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}" Padding="17"/>
+                <TextBlock Text="This utility allow deletion of old version Visual Studio 2017/2019/2022 Offline Setup files" Grid.Row="0" Style="{StaticResource HeaderTextBlockStyle}" Padding="17"/>
                 <Grid Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -121,11 +121,11 @@
             <StackPanel Grid.Column="4">
                 <TextBlock Text="Selected feature details" Padding="14" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBlock Text="Feature name" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,5"/>
-                <TextBlock Text="VS2017/2019 Offline Clean Util" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="VS2017/2019/2022 Offline Clean Util" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="Allow deletion of old version Visual Studio 2017/2019 Offline Setup files and folder, which saves your hard disk space." Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="Allow deletion of old version Visual Studio 2017/2019/2022 Offline Setup files and folder, which saves your hard disk space." Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="1.4.0.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="1.4.1.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
             </StackPanel>
             <!--#endregion Right Content-->
         </Grid>

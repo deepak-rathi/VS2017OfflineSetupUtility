@@ -1,5 +1,5 @@
 ﻿<!--
-    Copyright © 2017-2019 Deepak Rathi 
+    Copyright © 2017-2021 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -21,7 +21,7 @@
       xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
-      Title="VS2017/2019 Offline Setup Utility" Loaded="Page_Loaded">
+      Title="VS2017/2019/2022 Offline Setup Utility" Loaded="Page_Loaded">
 
     <Page.DataContext>
         <viewModel:DownloadUtilPageViewModel/>
@@ -52,7 +52,7 @@
         </Grid.RowDefinitions>
 
         <!--#region  Header-->
-        <TextBlock Grid.Row="0" Text="VS2017/2019 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <TextBlock Grid.Row="0" Text="VS2017/2019/2022 Offline Setup Utility" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <Rectangle Grid.Row="0" VerticalAlignment="Bottom" Style="{StaticResource HorizontalSeperatorStyle}"/>
         <!--#endregion Header-->
 
@@ -64,7 +64,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="(C) 2017-2019 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
+            <TextBlock Text="(C) 2017-2021 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
                        Padding="20" TextWrapping="Wrap" Foreground="Gray"
                        Grid.Column="0"/>
             <Button Content="Download" Grid.Column="1" Width="80" Height="30" Background="{StaticResource GreenSolidColorBrush}" Margin="10" Foreground="White"
@@ -86,7 +86,7 @@
 
             <!--#region Left Content-->
             <StackPanel Grid.Column="0">
-                <TextBlock Text="1. Select a folder to store offline files and select Visual Studio 2017/2019 Edition" Style="{StaticResource LeftContentTextBlockStyle}"/>
+                <TextBlock Text="1. Select a folder to store offline files and select Visual Studio 2017/2019/2022 Edition" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="2. Select language, optional and recommended install option" Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="3. Select Workload or customise it as per your need. &#x0a;Note*: If no checkbox is selected, all workload packages will be installed. &#x0a;Editor require atleast first two workloads to be selected if workload is customised." Style="{StaticResource LeftContentTextBlockStyle}"/>
                 <TextBlock Text="4. Verify CLI command and click download. This will run CLI command in command prompt." Style="{StaticResource LeftContentTextBlockStyle}"/>
@@ -172,11 +172,11 @@
             <StackPanel Grid.Column="4">
                 <TextBlock Text="Selected feature details" Padding="14" Style="{StaticResource HeaderTextBlockStyle}"/>
                 <TextBlock Text="Feature name" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,5"/>
-                <TextBlock Text="VS2017/2019 Offline Download" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="VS2017/2019/2022 Offline Download" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="Download Visual Studio 2017/2019 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="Download Visual Studio 2017/2019/2022 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="1.4.0.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="1.4.1.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
             </StackPanel>
             <!--#endregion Right Content-->
         </Grid>

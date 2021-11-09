@@ -14,13 +14,13 @@
     <PackageIcon></PackageIcon>
     <RepositoryUrl>https://github.com/deepak-rathi/VS2017OfflineSetupUtility</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>Added .Net Core 3.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Added VS2022</PackageReleaseNotes>
     <PackageId>VS2017OfflineSetupUtility</PackageId>
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©  2017-2020 Deepak Rathi</Copyright>
-    <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019 Offline Setup files and folder.</Description>
+    <Copyright>Copyright ©  2017-2021 Deepak Rathi</Copyright>
+    <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019/2022 Offline Setup files and folder.</Description>
     <AssemblyName>VS2017OfflineSetupUtility</AssemblyName>
   </PropertyGroup>
 
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>

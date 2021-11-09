@@ -15,13 +15,13 @@
     along with this program.  If not, see<http://www.gnu.org/licenses/> .
  -->
 <!-- The name of the product -->
-<?define Name = "VS2017 2019 Offline Setup Utility" ?>
+<?define Name = "VS2017 2019 2022 Offline Setup Utility" ?>
 <!-- The Description of the product -->
-<?define Description = "This utility allow downloading offline setup or deletion of old version Visual Studio 2017 2019 Offline Setup files and folder" ?>
+<?define Description = "This utility allow downloading offline setup or deletion of old version Visual Studio 2017 2019 2022 Offline Setup files and folder" ?>
 <!-- The manufacturer, for setup package publisher and folder info -->
 <?define Manufacturer = "Deepak Rathi" ?>
 <!-- The version number of this setup package-->
-<?define Version = "1.3.3" ?>
+<?define Version = "1.4.1" ?>
 <!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
 <?define UpgradeCode = "a49a94d4-f09a-4e3b-9b7e-b058cddd504e" ?>
 <!-- The name of the Cabinet -->
