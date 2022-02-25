@@ -22,7 +22,8 @@
       xmlns:viewModel="clr-namespace:VS2017OfflineSetupUtility.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1080"
-      Title="VS2017/2019/2022 Offline Setup Utility">
+      Title="VS2017/2019/2022 Offline Setup Utility"
+      Loaded="Page_Loaded">
     
     <Page.DataContext>
         <viewModel:HomePageViewModel/>

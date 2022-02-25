@@ -13,6 +13,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
 using System.Windows;
 
 namespace VS2017OfflineSetupUtility.Views
@@ -24,6 +25,13 @@ namespace VS2017OfflineSetupUtility.Views
     {
         public MainWindow()
         {
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length == 3 && args[1] == "-c")
+            {
+                App.AutoCleanup = true;
+                App.AutoCleanupFolder = args[2];
+            }
+
             InitializeComponent();
             App.CurrentFrame = _NavigationFrame;
             _NavigationFrame.Navigate(new HomePage());

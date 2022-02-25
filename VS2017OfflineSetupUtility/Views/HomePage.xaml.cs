@@ -14,6 +14,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System.Windows.Controls;
+using VS2017OfflineSetupUtility.ViewModels;
 
 namespace VS2017OfflineSetupUtility.Views
 {
@@ -25,6 +26,15 @@ namespace VS2017OfflineSetupUtility.Views
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (App.AutoCleanup)
+            {
+                var viewModel = (HomePageViewModel)DataContext;
+                App.CurrentFrame.Navigate(viewModel.Features[0].NavigateToView);
+            }
         }
     }
 }

@@ -10,5 +10,7 @@ namespace VS2017OfflineSetupUtility
     {
         //TODO://Use proper Naivgation Service. Due to lack of time I am using this variable, it will  be removed in future.
         public static Frame CurrentFrame;
+        public static bool AutoCleanup;
+        public static string AutoCleanupFolder;
     }
 }
