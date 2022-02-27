@@ -35,8 +35,6 @@ namespace VS2017OfflineSetupUtility.ViewModels
         public DownloadUtilPageViewModel()
         {
             AllVisualStudioEditions = VsEditionUtil.GetAllVisualStudioEditions();
-            SelectedVsEdition = AllVisualStudioEditions.FirstOrDefault();
-            DownloadWorkloadFromWeb(SelectedVsEdition);
         }
         #endregion
 

@@ -13,6 +13,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System.Windows;
 using System.Windows.Controls;
 
 namespace VS2017OfflineSetupUtility.Views
@@ -29,7 +30,18 @@ namespace VS2017OfflineSetupUtility.Views
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            (this.DataContext as ViewModels.CleanUtilPageViewModel)?.DoClassification();
+            var viewModel = (ViewModels.CleanUtilPageViewModel)DataContext;
+
+            if (App.AutoCleanup)
+            {
+                viewModel.SelectedFolderPath = App.AutoCleanupFolder;
+                viewModel.DoClassification();
+                viewModel.DeleteOldVersionCommand.Execute();
+            }
+            else
+            {
+                viewModel?.DoClassification();
+            }
         }
     }
 }

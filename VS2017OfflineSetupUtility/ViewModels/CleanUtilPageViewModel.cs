@@ -206,6 +206,8 @@ namespace VS2017OfflineSetupUtility.ViewModels
                          {
                              OldVersionModule.Clear();
                              ModuleCollection.Clear();
+                             if (App.AutoCleanup)
+                                 Application.Current.Shutdown();
                              MessageBox.Show("Operation successful.");
                          });
                     }
