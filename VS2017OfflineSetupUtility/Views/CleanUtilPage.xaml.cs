@@ -36,7 +36,10 @@ namespace VS2017OfflineSetupUtility.Views
             {
                 viewModel.SelectedFolderPath = App.AutoCleanupFolder;
                 viewModel.DoClassification();
-                viewModel.DeleteOldVersionCommand.Execute();
+                if (viewModel.OldVersionModule?.Count > 0)
+                    viewModel.DeleteOldVersionCommand.Execute();
+                else
+                    Application.Current.Shutdown();
             }
             else
             {
