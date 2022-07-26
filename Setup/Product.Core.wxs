@@ -21,7 +21,7 @@
 <!-- The manufacturer, for setup package publisher and folder info -->
 <?define Manufacturer = "Deepak Rathi" ?>
 <!-- The version number of this setup package-->
-<?define Version = "1.4.1" ?>
+<?define Version = "1.4.2" ?>
 <!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
 <?define UpgradeCode = "a49a94d4-f09a-4e3b-9b7e-b058cddd504e" ?>
 <!-- The name of the Cabinet -->

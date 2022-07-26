@@ -15,6 +15,7 @@
  */
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,6 +69,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                 if (SetProperty(ref _selectedFolderPath, value))
                 {
                     DeleteOldVersionCommand.RaiseCanExecuteChanged();
+                    DeleteOldVersionCleanCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -216,6 +218,54 @@ namespace VS2017OfflineSetupUtility.ViewModels
                         System.Diagnostics.Debug.WriteLine(exception.Message);
                     }
                 }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath) && OldVersionModule?.Count > 0));
+            }
+        }
+
+        #endregion
+
+        #region DeleteOldVersionCleanCommand
+        private DelegateCommand _deleteOldVersionCleanCommand;
+
+        public DelegateCommand DeleteOldVersionCleanCommand
+        {
+            get
+            {
+                return _deleteOldVersionCleanCommand ?? (_deleteOldVersionCleanCommand = new DelegateCommand(async () =>
+                {
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(SelectedFolderPath))
+                            return;
+
+                        ModuleCollection.Clear();
+                        OldVersionModule.Clear();
+
+                        DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
+                        if (dirInfo != null && !dirInfo.Exists)
+                        {
+                            SelectedFolderPath = "";
+                            return;
+                        }
+                        //Delete old version folder and files using --clean
+                        try
+                        {
+                            File.WriteAllText(dirInfo.FullName + @"\CleanupCommand.bat", string.Format("vs_setup.exe --layout {0} --clean {1}\\Catalog.json", dirInfo.FullName, dirInfo.FullName));
+                            Process.Start(new ProcessStartInfo()
+                            {
+                                FileName = dirInfo.FullName + @"\CleanupCommand.bat",
+                                WorkingDirectory = dirInfo.FullName
+                            });
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show("Error occured:" + exception.GetType().ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                    }
+                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath)));
             }
         }
 
