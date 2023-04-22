@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright © 2017-2018 Deepak Rathi 
+    Copyright © 2017-2023 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,12 +18,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Windows;
 using VS2017OfflineSetupUtility.Models;
 using VS2017OfflineSetupUtility.Mvvm;
 using VS2017OfflineSetupUtility.Utils;
+using System.Threading.Tasks;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
@@ -63,7 +63,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _selectFolderCommand ?? (_selectFolderCommand = new DelegateCommand(() =>
+                return _selectFolderCommand ??= new DelegateCommand(() =>
                 {
                     var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
                     try
@@ -79,13 +79,13 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     }
                     catch (Exception exception)
                     {
-                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                        Debug.WriteLine(exception.Message);
                     }
                     finally
                     {
                         folderBrowserDialog.Dispose();
                     }
-                }));
+                });
             }
         }
         #endregion
@@ -100,7 +100,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 if (SetProperty(ref _vsEdition, value) && value != null)
                 {
-                    DownloadWorkloadFromWeb(value);
+                    _ = Task.Run(() => DownloadWorkloadFromWebAsync(value));
                     GenerateCli(SelectedVsEdition);
                 }
             }
@@ -109,7 +109,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
 
         #region Language
 
-        public List<string> Languagelist
+        public static List<string> Languagelist
         {
             get
             {
@@ -152,10 +152,10 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _vsRecommendedCommand ?? (_vsRecommendedCommand = new DelegateCommand<bool?>((IsChecked) =>
+                return _vsRecommendedCommand ??= new DelegateCommand<bool?>((IsChecked) =>
                 {
                     _isRecommendedSelected = IsChecked;
-                }));
+                });
             }
         }
 
@@ -170,10 +170,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _vsOptionalCommand ?? (_vsOptionalCommand = new DelegateCommand<bool?>((IsChecked) =>
-                {
-                    _isOptionalSelected = IsChecked;
-                }));
+                return _vsOptionalCommand ??= new DelegateCommand<bool?>((IsChecked) => { _isOptionalSelected = IsChecked; });
             }
         }
 
@@ -186,10 +183,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _workloadComponentChanged ?? (_workloadComponentChanged = new DelegateCommand(() =>
-                {
-                    GenerateCli(SelectedVsEdition);
-                }));
+                return _workloadComponentChanged ??= new DelegateCommand(() => { GenerateCli(SelectedVsEdition); });
             }
         }
 
@@ -218,17 +212,16 @@ namespace VS2017OfflineSetupUtility.ViewModels
         #endregion
 
         #region Download Workload from web
-        private void DownloadWorkloadFromWeb(VsEdition vsEdition)
+        private async Task DownloadWorkloadFromWebAsync(VsEdition vsEdition)
         {
             try
             {
-                WebClient webClient = new WebClient();
-                IWebProxy webProxy = WebRequest.DefaultWebProxy;
-                webProxy.Credentials = CredentialCache.DefaultCredentials;
-                webClient.Proxy = webProxy;
-                var markdownText = webClient.DownloadString((string)vsEdition.WorkloadGitHubUri);
+                using var httpClient = new HttpClient();
+                var response = await httpClient.GetAsync((string)vsEdition.WorkloadGitHubUri);
+                response.EnsureSuccessStatusCode();
+                var markdownText = await response.Content.ReadAsStringAsync();
 
-                WorkloadProcesser.ProcessMarkDownText(markdownText, (List<Workload>)vsEdition.vsEditonWorkloads.Workloads);
+                WorkloadProcesser.ProcessMarkDownText(markdownText, vsEdition.vsEditonWorkloads.Workloads);
                 vsEdition.SaveAllWorkloadsToFile();
                 Workloads = vsEdition.vsEditonWorkloads.Workloads.ToObservableCollection();
                 GenerateCli(vsEdition);
@@ -257,22 +250,22 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _downloadCommand ?? (_downloadCommand = new DelegateCommand(() =>
+                return _downloadCommand ??= new DelegateCommand(async () =>
                 {
                     var dirInfo = new DirectoryInfo(SelectedFolderPath);
                     var subdirInfo = dirInfo.CreateSubdirectory("Setup");
                     try
                     {
-                        WebClient webClient = new WebClient();
-                        IWebProxy webProxy = WebRequest.DefaultWebProxy;
-                        webProxy.Credentials = CredentialCache.DefaultCredentials;
-                        webClient.Proxy = webProxy;
+                        using var httpClient = new HttpClient();
                         //Download Setup exe from web
-                        webClient.DownloadFile(new Uri(SelectedVsEdition.SetupUri), subdirInfo.FullName + @"\" + SelectedVsEdition.Name.Replace(' ', '_') + ".exe");
-                        File.WriteAllText(subdirInfo.FullName + @"\CliCommand.bat", CliText);
+                        var response = await httpClient.GetAsync(new Uri(SelectedVsEdition.SetupUri));
+                        response.EnsureSuccessStatusCode();
+                        var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                        File.WriteAllBytes(Path.Combine(subdirInfo.FullName, $"{SelectedVsEdition.Name.Replace(' ', '_')}.exe"), fileBytes);
+                        File.WriteAllText(Path.Combine(subdirInfo.FullName, "CliCommand.bat"), CliText);
                         Process.Start(new ProcessStartInfo()
                         {
-                            FileName = subdirInfo.FullName + @"\CliCommand.bat",
+                            FileName = Path.Combine(subdirInfo.FullName, "CliCommand.bat"),
                             WorkingDirectory = subdirInfo.FullName
                         });
                     }
@@ -281,7 +274,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                         MessageBox.Show("Error occured:" + exception.GetType().ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
-                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath)));
+                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath));
             }
         }
 
@@ -294,10 +287,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _goBackCommand ?? (_goBackCommand = new DelegateCommand(() =>
-                {
-                    App.CurrentFrame.GoBack();
-                }));
+                return _goBackCommand ??= new DelegateCommand(App.CurrentFrame.GoBack );
             }
         }
         #endregion

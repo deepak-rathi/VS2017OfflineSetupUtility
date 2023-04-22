@@ -28,7 +28,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
 
         public Feature SelectedFeature
         {
-            get { return _selectedFeature ?? (_selectedFeature = Features.FirstOrDefault()); }
+            get { return _selectedFeature ??= Features.FirstOrDefault(); }
             set { SetProperty(ref _selectedFeature, value); }
         }
 
@@ -39,7 +39,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
 
         public List<Feature> Features
         {
-            get { return _features ?? (_features = Utils.FeatureUtil.GetFeatures()); }
+            get { return _features ??= Utils.FeatureUtil.GetFeatures(); }
             set { SetProperty(ref _features, value); }
         }
         #endregion
@@ -51,12 +51,13 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _featureClickedCommand ?? (_featureClickedCommand = new DelegateCommand<Feature>((feature) =>
-                {
+                return _featureClickedCommand ??= new DelegateCommand<Feature>((feature) => 
+                { 
                     SelectedFeature.IsSelected = false;
-                    SelectedFeature = feature;
+                    SelectedFeature = feature; 
                     SelectedFeature.IsSelected = true;
-                }));
+                    ProceedCommand.Execute();
+                });
             }
         }
         #endregion  FeatureClickedCommand
@@ -68,10 +69,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _proceedCommand ?? (_proceedCommand = new DelegateCommand(() =>
-                {
-                    App.CurrentFrame.Navigate(Features.FirstOrDefault(feature=>feature.IsSelected).NavigateToView);
-                }));
+                return _proceedCommand ??= new DelegateCommand(() => { App.CurrentFrame.Navigate(Features.FirstOrDefault(feature => feature.IsSelected).NavigateToView); });
             }
         }
         #endregion  Proceed Command
@@ -83,11 +81,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _exitCommand ?? (_exitCommand = new DelegateCommand(() =>
-                {
-                    // Shutdown the application.
-                    Application.Current.Shutdown();
-                }));
+                return _exitCommand ??= new DelegateCommand(Application.Current.Shutdown);
             }
         }
         #endregion  Exit Command

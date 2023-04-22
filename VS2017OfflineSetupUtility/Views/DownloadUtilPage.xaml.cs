@@ -21,7 +21,7 @@ namespace VS2017OfflineSetupUtility.Views
                 return;
 
             if (viewModel.SelectedVsEdition == null)
-                viewModel.SelectedVsEdition = viewModel.AllVisualStudioEditions.FirstOrDefault();
+                viewModel.SelectedVsEdition = viewModel.AllVisualStudioEditions.FirstOrDefault( x=>x.Version.Equals("17C"));
 
             viewModel.GenerateCli(viewModel.SelectedVsEdition);
         }

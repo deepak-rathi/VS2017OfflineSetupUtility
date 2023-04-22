@@ -82,7 +82,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _selectFolderCommand ?? (_selectFolderCommand = new DelegateCommand(() =>
+                return _selectFolderCommand ??= new DelegateCommand(() =>
                 {
                     var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
                     try
@@ -102,13 +102,13 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     }
                     catch (Exception exception)
                     {
-                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                        Debug.WriteLine(exception.Message);
                     }
                     finally
                     {
                         folderBrowserDialog.Dispose();
                     }
-                }));
+                });
             }
         }
 
@@ -120,7 +120,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
             ModuleCollection.Clear();
             OldVersionModule.Clear();
 
-            DirectoryInfo dirInfo = new DirectoryInfo(SelectedFolderPath);
+            var dirInfo = new DirectoryInfo(SelectedFolderPath);
             if (dirInfo != null && !dirInfo.Exists)
             {
                 SelectedFolderPath = "";
@@ -191,7 +191,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _deleteOldVersionCommand ?? (_deleteOldVersionCommand = new DelegateCommand(async () =>
+                return _deleteOldVersionCommand ??= new DelegateCommand(async () =>
                 {
                     try
                     {
@@ -217,7 +217,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     {
                         System.Diagnostics.Debug.WriteLine(exception.Message);
                     }
-                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath) && OldVersionModule?.Count > 0));
+                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath) && OldVersionModule?.Count > 0);
             }
         }
 
@@ -230,7 +230,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _deleteOldVersionCleanCommand ?? (_deleteOldVersionCleanCommand = new DelegateCommand(async () =>
+                return _deleteOldVersionCleanCommand ??= new DelegateCommand(() =>
                 {
                     try
                     {
@@ -263,9 +263,9 @@ namespace VS2017OfflineSetupUtility.ViewModels
                     }
                     catch (Exception exception)
                     {
-                        System.Diagnostics.Debug.WriteLine(exception.Message);
+                        Debug.WriteLine(exception.Message);
                     }
-                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath)));
+                }, () => !string.IsNullOrWhiteSpace(SelectedFolderPath));
             }
         }
 
@@ -278,10 +278,7 @@ namespace VS2017OfflineSetupUtility.ViewModels
         {
             get
             {
-                return _goBackCommand ?? (_goBackCommand = new DelegateCommand(() =>
-                {
-                    App.CurrentFrame.GoBack();
-                }));
+                return _goBackCommand ??= new DelegateCommand(App.CurrentFrame.GoBack);
             }
         }
         #endregion  Exit Command

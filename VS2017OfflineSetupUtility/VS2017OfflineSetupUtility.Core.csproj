@@ -1,17 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-	  <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>VS2017OfflineSetupUtility.App</StartupObject>
     <Version>1.4.2</Version>
     <Product>VS2017 Offline Setup Utility</Product>
-    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseExpression>
+    </PackageLicenseExpression>
     <Company />
     <Authors>Deepak Rathi</Authors>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>
+    </PackageIcon>
     <RepositoryUrl>https://github.com/deepak-rathi/VS2017OfflineSetupUtility</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageReleaseNotes>Added VS2022</PackageReleaseNotes>
@@ -23,34 +24,31 @@
     <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019/2022 Offline Setup files and folder.</Description>
     <AssemblyName>VS2017OfflineSetupUtility</AssemblyName>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>false</Optimize>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="Assets\logo.ico" />
     <None Include="..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.1" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Assets\logo.ico">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

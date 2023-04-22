@@ -1,5 +1,5 @@
 ﻿<!--
-    Copyright © 2017-2021 Deepak Rathi 
+    Copyright © 2017-2023 Deepak Rathi 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -64,10 +64,10 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="(C) 2017-2022 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
+            <TextBlock Text="(C) 2017-2023 Deepak Rathi. THIS APPLICATION IS PROVIDED AS IS WITH OUT ANY WARRANTY OF ANY KIND. DEVELOPER OF THIS APP IS NOT RESPONSIBLE FOR ANY PROBLEM/ISSUE/DEFECTS CAUSED DUE TO THIS APPLICATION OR ANY CONTENT IN THIS APPLICATION. THIS APP IS NOT AFFILIATED TO MICROSOFT OR ANY OTHER THIRD PARTY. NO USER DATA IS COLLECTED BY DEVELOPER OF THIS APP." 
                        Padding="20" TextWrapping="Wrap" Foreground="Gray"
                        Grid.Column="0"/>
-            <Button Content="Download" Grid.Column="1" Width="80" Height="30" Background="{StaticResource GreenSolidColorBrush}" Margin="10" Foreground="White"
+            <Button Content="Download" Grid.Column="1" Width="80" Height="30" Background="{StaticResource GreenSolidColorBrush}" Margin="10" Foreground="LightGray"
                     Command="{Binding DownloadCommand}"/>
             <Button Content="Go Back" Grid.Column="2" Width="80" Height="30" Background="White" Margin="10"
                     Command="{Binding GoBackCommand}"/>
@@ -176,7 +176,7 @@
                 <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
                 <TextBlock Text="Download Visual Studio 2017/2019/2022 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="1.4.2.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="1.4.3.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
             </StackPanel>
             <!--#endregion Right Content-->
         </Grid>
