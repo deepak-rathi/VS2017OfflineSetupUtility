@@ -176,7 +176,7 @@
                 <TextBlock Text="About" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
                 <TextBlock Text="Download Visual Studio 2017/2019/2022 Offline Setup files and folder, using command line interface. (Need internet connection)" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
                 <TextBlock Text="Version" Style="{StaticResource SubHeaderTextBlockStyle}" Padding="14,20,14,5"/>
-                <TextBlock Text="1.4.3.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
+                <TextBlock Text="1.4.4.0" Style="{StaticResource BodyTextBlockStyle}" Padding="14,0"/>
             </StackPanel>
             <!--#endregion Right Content-->
         </Grid>

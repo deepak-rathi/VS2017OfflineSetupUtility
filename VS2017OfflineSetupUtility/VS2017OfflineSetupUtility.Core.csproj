@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <PublishSingleFile>true</PublishSingleFile>
@@ -11,7 +11,7 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <StartupObject>VS2017OfflineSetupUtility.App</StartupObject>
-    <Version>1.4.2</Version>
+    <Version>1.4.4</Version>
     <Product>VS2017 Offline Setup Utility</Product>
     <PackageLicenseExpression>
     </PackageLicenseExpression>
@@ -21,12 +21,12 @@
     </PackageIcon>
     <RepositoryUrl>https://github.com/deepak-rathi/VS2017OfflineSetupUtility</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>Upgraded to .Net7</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgraded to .Net8</PackageReleaseNotes>
     <PackageId>VS2017OfflineSetupUtility</PackageId>
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©  2017-2023 Deepak Rathi</Copyright>
+    <Copyright>Copyright ©  2017-2024 Deepak Rathi</Copyright>
     <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019/2022 Offline Setup files and folder.</Description>
     <AssemblyName>VS2017OfflineSetupUtility</AssemblyName>
   </PropertyGroup>
@@ -46,8 +46,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.10" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\logo.ico">
