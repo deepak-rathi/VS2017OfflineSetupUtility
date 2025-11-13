@@ -26,8 +26,8 @@
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©  2017-2024 Deepak Rathi</Copyright>
-    <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019/2022 Offline Setup files and folder.</Description>
+    <Copyright>Copyright ©  2017-2025 Deepak Rathi</Copyright>
+    <Description>This utility allow downloading offline setup or deletion of old version Visual Studio 2017/2019/2022/2026 Offline Setup files and folder.</Description>
     <AssemblyName>VS2017OfflineSetupUtility</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,8 +46,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\logo.ico">
