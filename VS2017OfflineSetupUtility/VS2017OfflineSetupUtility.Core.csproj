@@ -11,7 +11,7 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <StartupObject>VS2017OfflineSetupUtility.App</StartupObject>
-    <Version>1.4.4</Version>
+    <Version>1.4.5</Version>
     <Product>VS2017 Offline Setup Utility</Product>
     <PackageLicenseExpression>
     </PackageLicenseExpression>

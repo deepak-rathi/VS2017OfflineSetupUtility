@@ -94,6 +94,30 @@ namespace VS2017OfflineSetupUtility.Utils
                     SetupUri = "https://aka.ms/vs/17/release/vs_enterprise.exe",
                     WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2022",
                     WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2022/workload-component-id-vs-enterprise.md",
+                },
+
+                new VsEdition() {
+                    Version ="18C",
+                    Name = "Visual Studio 2026 Community",
+                    SetupUri = "https://aka.ms/vs/stable/vs_community.exe",
+                    WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community?view=vs-2026",
+                    WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2026/workload-component-id-vs-community.md",
+                },
+
+                new VsEdition() {
+                    Version = "18P",
+                    Name = "Visual Studio 2026 Professional",
+                    SetupUri = "https://aka.ms/vs/stable/vs_professional.exe",
+                    WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional?view=vs-2026",
+                    WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2026/workload-component-id-vs-professional.md",
+                },
+
+                new VsEdition()  {
+                    Version = "18E",
+                    Name = "Visual Studio 2026 Enterprise",
+                    SetupUri = "https://aka.ms/vs/stable/vs_enterprise.exe",
+                    WorkloadDocUri = "https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2026",
+                    WorkloadGitHubUri = "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/master/docs/install/includes/vs-2026/workload-component-id-vs-enterprise.md",
                 }
             };
         }
