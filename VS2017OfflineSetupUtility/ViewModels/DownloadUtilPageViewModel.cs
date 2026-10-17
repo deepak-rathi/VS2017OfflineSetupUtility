@@ -24,9 +24,11 @@ using VS2017OfflineSetupUtility.Models;
 using VS2017OfflineSetupUtility.Mvvm;
 using VS2017OfflineSetupUtility.Utils;
 using System.Threading.Tasks;
+using System.Runtime.Versioning;
 
 namespace VS2017OfflineSetupUtility.ViewModels
 {
+    [SupportedOSPlatform("windows")]
     class DownloadUtilPageViewModel : BindableBase
     {
         public List<VsEdition> AllVisualStudioEditions { get; set; }
@@ -65,6 +67,13 @@ namespace VS2017OfflineSetupUtility.ViewModels
             {
                 return _selectFolderCommand ??= new DelegateCommand(() =>
                 {
+                    // Runtime guard: folder dialogs are Windows-only
+                    if (!OperatingSystem.IsWindows())
+                    {
+                        MessageBox.Show("Folder selection is supported only on Windows.", "Not Supported", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
                     var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
                     try
                     {

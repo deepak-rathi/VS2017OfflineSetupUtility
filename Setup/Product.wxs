@@ -127,7 +127,7 @@
                   Name="$(var.Name)"
                   Description="$(var.Description)"
                   Directory="DesktopFolder"
-                  Target="[#Sample_Application.exe]"
+                  Target="[#VS2017OfflineSetupUtil_Application.exe]"
                   WorkingDirectory="INSTALLFOLDER"/>
         <!--Remove desktop shortcut on uninstall-->
         <RemoveFolder Id="DesktopFolder" On="uninstall"/>

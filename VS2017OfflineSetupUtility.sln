@@ -1,12 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29920.165
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VS2017OfflineSetupUtility.Core", "VS2017OfflineSetupUtility\VS2017OfflineSetupUtility.Core.csproj", "{CFDA2EA7-899E-417F-881A-905A3ED836D6}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.Core.wixproj", "{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,12 +13,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Debug|x86.ActiveCfg = Debug|x86
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Debug|x86.Build.0 = Debug|x86
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Release|Any CPU.ActiveCfg = Release|x86
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Release|x86.ActiveCfg = Release|x86
-		{1DE5EC25-4759-43D1-A48F-33FCA5FF3134}.Release|x86.Build.0 = Release|x86
 		{CFDA2EA7-899E-417F-881A-905A3ED836D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CFDA2EA7-899E-417F-881A-905A3ED836D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFDA2EA7-899E-417F-881A-905A3ED836D6}.Debug|x86.ActiveCfg = Debug|Any CPU
