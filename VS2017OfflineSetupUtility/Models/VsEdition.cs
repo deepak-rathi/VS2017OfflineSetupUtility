@@ -54,7 +54,14 @@ namespace VS2017OfflineSetupUtility.Models
         public void GenerateCLICommand(string vsEdition, string filePath, string language, bool IsRecommendedSelected, bool IsOptionalSelected)
         {
             var exe = vsEdition.Replace(' ', '_') + ".exe ";
-            var layout = "--layout \"" + filePath + "\" ";
+            // Normalize the layout path to avoid a trailing directory separator before the closing quote
+            // which can escape the quote when passed through the bootstrapper. Also handle empty path.
+            var layout = string.Empty;
+            if (!string.IsNullOrWhiteSpace(filePath))
+            {
+                var normalizedPath = filePath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                layout = "--layout \"" + normalizedPath + "\" ";
+            }
             var body = new List<string>();
             var suffix = "";
             var lang = "--lang " + language;
